@@ -7,7 +7,73 @@
     <title>Project</title>
 </head>
 <body>
-    
+      <nav class="nav">
+        <div class="container container__space-between">
+            <div class="logo">
+                <a href="#"><img src="./images/icons/logo.png" alt="logo"></a>
+            </div>
+            <ul class="nav__list">
+                <li class="nav__item"><a class="nav__link" href="#">Úvod</a></li>
+                <li class="nav__item"><a class="nav__link" href="#">Články</a></li>
+                <li class="nav__item"><button class="button--success">Přihlásit se</button></li>
+                <li class="nav__item">
+                    <div class="user-menu__container">                
+                        <div class="user-menu">
+                            <img src="./images/icons/avatar.png" class="avatar"></img>
+                            <div>                        
+                                Vítke  
+                                <span class="user-menu__role">EDITOR</span>
+                                <div class="email-text">sardor@mail.com</div>
+                            </div>
+                        </div>
+                        <ul class="user-dropdown">
+                            <li class="user-dropdown__item">
+                                <div class="item__group logout-item">
+                                    <img class="user-dropdown__logo" src="./images/icons/settings.png" alt="Nastavení">
+                                    Nastavení profilu
+                                </div>
+                            </li>
+                            <li class="user-dropdown__item">
+                                <div class="item__group">
+                                    <img src="./images/icons/file-plus-02.png" alt="Nastavení">
+                                    Přidat článek
+                                </div>
+                            </li>
+                            <li class="user-dropdown__item">
+                                <div class="item__group">
+                                    <div class="small-notification tsst" id="check-article-count" current-count="22">
+                                        <img src="./images/icons/check-broken.png" alt="">
+                                    </div>
+                                    Schválit
+                                </div>
+                            </li>
+                            <li class="user-dropdown__item">
+                                <div class="item__group">
+                                    <img src="./images/icons/file-edit-02.png" alt="Nastavení">
+                                    Moje články
+                                </div>
+                            </li>
+                        
+                            <li class="user-dropdown__item">
+                                <div class="item__group">
+                                    <div class="small-notification tsst" id="message-count" current-count="1">
+                                        <img src="./images/icons/message-text-01.png" alt="">
+                                    </div>
+                                    Zprávy
+                                </div>
+                            </li>
+                            <li class="user-dropdown__item">
+                                <div class="item__group logout-item">
+                                    <img src="./images/icons/sign-out.png" alt="Nastavení">
+                                    Odhlásit se
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav> 
 </body>
 <script src="js/main.js"></script>
 </html>
