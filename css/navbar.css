@@ -1,26 +1,27 @@
+.nav__container--behaviour {
+    display: flex;
+    justify-content: space-between;
+}
+
 .nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
+    z-index: 400;
     padding-top: 24px;
 }
 
 .nav__list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
     display: flex;
     align-items: center;
 }
     
 .nav__link {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 1.125em;
     color: var(--white);
     display: block;
     padding: 10px 20px;
-    text-decoration: none;
 }
 
 .nav__link:hover {
@@ -38,19 +39,20 @@
     align-items: center;
     gap: 12px;
     cursor: pointer;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--white);
     height: 54px;
     padding: 0 16px;
     background-color: var(--lighter-primary);
     border-radius: 14px;
+    font-size: 1.125em;
+    font-weight: 500;
+    color: var(--white);
 }
 
 .avatar {
     width: 42px;
     height: 42px;
 }
+
 
 .user-menu:hover {
     border-bottom-left-radius: 0;
@@ -64,6 +66,7 @@
     color: var(--light-blue);
     font-size: 11px;
     font-weight: bold;
+    margin-left: 6px;
 }
 
 .email-text {
@@ -84,7 +87,7 @@
     background-color: var(--lighter-primary);
     padding: 14px 15px;
     color: var(--white);
-    font-size: 18px;
+    font-size: 1.125em;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -106,6 +109,9 @@
     display: flex;
     gap: 12px;
     align-items: center;
+    font-size: 1.125em;
+    font-weight: 500;
+    color: var(--white);
 }
 
 .small-notification {
@@ -114,29 +120,22 @@
 
 .small-notification::after {
     content: attr(current-count);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: absolute;
-    top: -8px;
+    top: -19px;
     left: 15px;
-    width: 16px;
-    height: 16px;
+    display: inline-block;
+    padding: 2px;
+    min-width: 14px;
+    text-align: center;
     border-top-right-radius: 50%;
     border-top-left-radius: 50%;
     border-bottom-right-radius: 50%;
     background-color: var(--error);
-    font-size: 14px;
+    font-size: 0.875em;
     color: var(--white);
 }
 
-.logout-item {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.logout-item::before {
+.user-dropdown__separator::before {
     content: "";
     width: 90%;
     height: 1px;
@@ -144,4 +143,17 @@
     top: 4px;
     left: 5%;
     position: absolute;
+}
+
+@media only screen and (max-width: 650px) {
+    .nav__container--behaviour {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav__list {
+        margin-top: 24px;
+        flex-direction: column;
+        gap: 24px;
+    }
 }
