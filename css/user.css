@@ -1,0 +1,78 @@
+
+.button--success--smaller {
+  height: 46px;
+  width: 159px;
+  background-color: var(--green);
+  font-size: 1rem;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.container--center {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.user-section {
+  display: flex;
+  gap: 250px;
+  flex-wrap: wrap;
+}
+
+.user-info__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-info__avatar {
+  width: 150px;
+  height: 150px;
+}
+
+.user-info__user-name {
+  margin-top: 18px;
+  font-size: 28px;
+}
+
+.user-info__email {
+  font-size: 16px;
+  color: var(--secondary);
+}
+
+.user-info__propeties {
+  display: flex;
+  margin-top: 50px;
+}
+
+.user-info__propeties-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 130px;
+}
+.user-info__propeties-box:nth-child(2) {
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.user-info__amount {
+  color: var(--green);
+  font-size: 28px;
+}
+
+.user-info__text {
+  color: var(--secondary);
+  font-size: 18px;  
+}
+
+@media only screen and (max-width:500px) {
+  .user-info__propeties-box {
+    width: 100px;
+  }
+}

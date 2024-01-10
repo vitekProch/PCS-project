@@ -1,0 +1,157 @@
+
+.article-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin: 50px 0px;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar__article-detail {
+  width: 48px;
+  height: 48px;
+}
+
+.author-name {
+  color: var(--green);
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.article-info {
+  font-size: 16px;
+  color: var(--secondary);
+  position: relative;
+  display: inline;
+}
+
+.article-date-and-likes{
+  white-space:pre;
+  color: var(--secondary);
+}
+
+.like-amount {
+  color: var(--secondary);
+}
+
+.article-date-and-likes::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 164px;
+  width: 2px;
+  height: 22px;
+  background-color: var(--green);
+}
+
+.like-amount::after {
+  content: "❤";
+  color: var(--green);
+}
+
+.img-holder {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.img-sizer {
+  max-width: 500px;
+}
+
+.img-holder img {
+  width: 100%;
+  height: 100%;
+}
+
+.article-text {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 10px;
+}
+
+.like-holder {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.article-like {
+  cursor: pointer;
+}
+
+.article-like.active {
+  cursor: pointer;
+  color: var(--green);
+}
+
+*, :before, :after {
+  box-sizing: border-box;  
+}
+
+
+#like {
+  cursor: pointer;
+}
+
+#like-active {
+  display: none;
+  cursor: pointer;
+}
+
+.editor-accept-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.comments-title {
+  font-size: 48px;
+}
+
+.comments{
+  display: flex;
+  flex-direction: column;
+  gap: 41px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background-color: var(--lighter-primary);
+  border-radius: 16px;
+}
+
+.comment__header {
+  width: 272px;
+}
+
+.user-menu--change {
+  padding: 0;
+}
+
+
+.add-comment {
+  width: 500px;
+}
+
+
+@media only screen and (max-width:550px) {
+  .button__bigest--success, .button__bigest--error {
+    height: 38px !important;
+    width: 129px !important;
+    font-size: 18px !important;
+  }
+
+  .add-comment {
+    width: 100%;
+  }
+}

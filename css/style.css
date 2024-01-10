@@ -1,4 +1,11 @@
 @import "navbar.css";
+@import "homapege.css";
+@import "forms.css";
+@import "user.css";
+@import "articles.css";
+@import "article-detail.css";
+@import "messages.css";
+@import "footer.css";
 
 :root{
   --primary: #202442;
@@ -8,8 +15,10 @@
   --green: #32B46A;
   --light-blue: #05CDDF;
   --white:#FFFFFF;
+  --like-background-color: transparent;
+  --like-border-color: #FFFFFF;
+  --navbar-height: 64px;
 }
-
 
 * {
   box-sizing: border-box;
@@ -17,6 +26,7 @@
   margin: 0;
   text-decoration: none;
   list-style-type: none;
+  color: var(--white);
 }
 
 body {
@@ -24,7 +34,43 @@ body {
 }
 
 .container {
-  width: 1120px;
+  width: 1140px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal-overlay{
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed; 
+  z-index: 9999; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.button__bigest--success, .button__bigest--error {
+  height: 63px;
+  width: 215px;
+  font-size: 24px;
+  font-weight: 600;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+}
+.button__bigest--success {
+  background-color: var(--green);
+}
+
+.button__bigest--error {
+  background-color: var(--error);
 }
 
 .button--success {
@@ -33,7 +79,109 @@ body {
   background-color: var(--green);
   font-size: 1.5rem;
   border-radius: 16px;
-  color: white;
   border: none;
   cursor: pointer;
+}
+
+.button--success--smaller {
+  height: 38px;
+  width: 129px;
+}
+
+.button--edit--smaller {
+  background-color: var(--light-blue);
+}
+
+.button-form--success {
+  background-color: var(--green);
+  font-size: 1.5rem;
+  border-radius: 16px;
+  height: 54px;
+  border: none;
+  cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #0E0D0D;
+}
+
+/* Track */
+::-webkit-scrollbar-track { 
+  border-radius: 16px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #6c6c6c; 
+}
+
+.separator {
+  opacity: 30%;
+}
+
+.main-class {
+  padding-top: 128px;
+  margin-bottom: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.disable {
+  pointer-events: none;
+  opacity: 50%;
+}
+
+.bar{
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--secondary);
+}
+
+.hamburger {
+  cursor: pointer;
+}
+
+.hamburger.navbar-toggler{
+  overflow: hidden;
+}
+  .hamburger.navbar-toggler .bar:nth-child(2){
+  transform: translateX(60px);
+}
+  .hamburger.navbar-toggler .bar:nth-child(1){
+  transform: translateY(8px) rotate(45deg);
+}
+  .hamburger.navbar-toggler .bar:nth-child(3){
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+  .hamburger.navbar-toggler.collapsed .bar:nth-child(2){
+  transform: translateX(0px);
+}
+  .hamburger.navbar-toggler.collapsed .bar:nth-child(1){
+  transform: translateY(0px);
+}
+  .hamburger.navbar-toggler.collapsed .bar:nth-child(3){
+  transform: translateY(0px);
+}
+
+
+@media screen and (max-width: 360px) {
+  .container {
+    padding: 0;
+  }
 }
