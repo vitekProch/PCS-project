@@ -72,45 +72,64 @@ class ArticlesController
         //return header('location: /projekty/PCS2023/PCS-project/articles');
     }
 
-    public function createArticle($data)
-    {
-        echo "<prispre>";
-            print_r($_FILES['article_image']);
-        echo "</prispre>";
-        $imgName = $_FILES['article_image']['name'];
-        $imgSize = $_FILES['article_image']['size'];
-        $imgTmpName = $_FILES['article_image']['tmp_name'];
-        $error = $_FILES['article_image']['error'];
-
-        if ($error !== 0) {
-            $em = "Něco se pokazilo";
-            return header('location: "/projekty/PCS2023/PCS-project/articles?error=$em"');
-        }
-        if ($imgSize > 125000) {
-            $em = "Bohužel váš obrázek je moc velký";
-            return header('location: "/projekty/PCS2023/PCS-project/articles?error=$em"');
-        }
-        $imgEx = pathinfo($imgName, PATHINFO_EXTENSION);    
-        $imgExLc = strtolower($imgEx);
-		$allowedExs = array("jpg", "jpeg", "png"); 
-        if (!in_array($imgExLc, $allowedExs)) {
-            $em = "Špatný typ souboru.";
-            header("Location: index.php?error=$em");
-        }
-        $new_img_name = uniqid("IMG-", true).'.'.$imgExLc;
-        $img_upload_path = $_SERVER['DOCUMENT_ROOT'] . '/PCS-project/images/uploads/articles';
-        if (!file_exists(dirname($img_upload_path))) {
-            mkdir(dirname("TEST"), 0777, true);
-        }
-        move_uploaded_file($imgTmpName, $img_upload_path);
-
-        echo $img_upload_path;
-        //$this->article->createArticle($data);
-    }
-    
     public function editArticle()
     {
         echo "ERRRRORRR";
     }
 
+    public function createArticle($data)
+    {
+        if(!$this->articleImageValidation()) {
+
+            $em = "Něco se pokazilo. Zkontrolujte typ, nebo velikost souboru.";
+            return header('location: "/projekty/PCS2023/PCS-project/articles?error=$em"');
+        };
+        $articleImgName = $this->createArticleImgName();
+        $this->uploadImg($articleImgName);
+        $data['article_image'] = $articleImgName;
+        $this->article->createArticle($data);
+    }
+    
+
+
+    public function articleImageValidation(): bool
+    {
+        $imgSize = $_FILES['article_image']['size'];
+        $error = $_FILES['article_image']['error'];
+        $imgName = $_FILES['article_image']['name'];
+
+        $imgEx = pathinfo($imgName, PATHINFO_EXTENSION);    
+        $imgExLc = strtolower($imgEx);
+		$allowedExs = array("jpg", "jpeg", "png"); 
+
+        if ($error !== 0) {
+            return false;
+        }
+
+        // if ($imgSize > 125000) {
+        //     return false;
+        // }
+
+        if (!in_array($imgExLc, $allowedExs)) {
+            return false;
+        }
+        return true;
+    }
+
+    public function createArticleImgName(): string
+    {
+        $imgName = $_FILES['article_image']['name'];
+        $imgEx = pathinfo($imgName, PATHINFO_EXTENSION);    
+        $imgExLc = strtolower($imgEx);
+        $newImgName = uniqid("IMG-", true).'.'.$imgExLc;
+
+        return $newImgName;
+    }
+
+    public function uploadImg(string $imgName): void
+    {
+        $imgTmpName = $_FILES['article_image']['tmp_name'];
+        $img_upload_path = $_SERVER['DOCUMENT_ROOT'] . '/projekty/PCS2023/PCS-project/images/uploads/articles/' . $imgName;
+        move_uploaded_file($imgTmpName, $img_upload_path);
+    }
 }

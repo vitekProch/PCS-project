@@ -36,6 +36,6 @@ class Article extends Model
 
     public function createArticle($values)
     {
-        return $this->database->query("INSERT INTO $this->table (title, subtitle, article_image, article_content, user_id, article_status) VALUES (?, ?, ?, ?, 1, 2)", $values);
+        return $this->database->query("INSERT INTO $this->table (title, subtitle, article_content, article_image, user_id, article_status) VALUES (?, ?, ?, ?, 1, 2)", $values);
     }
 }
