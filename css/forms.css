@@ -110,6 +110,10 @@ textarea {
   z-index: 100;
 }
 
+.form-icon.edit, .form-icon.cross, .form-icon.accept {
+  top: 32px;
+}
+
 .form-icon.edit {
   cursor: pointer;
 }

@@ -82,26 +82,7 @@
   justify-content: end;
 }
 
-.article-like {
-  cursor: pointer;
-}
-
-.article-like.active {
-  cursor: pointer;
-  color: var(--green);
-}
-
-*, :before, :after {
-  box-sizing: border-box;  
-}
-
-
-#like {
-  cursor: pointer;
-}
-
-#like-active {
-  display: none;
+.like-icon {
   cursor: pointer;
 }
 
@@ -109,6 +90,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 .comments-title {

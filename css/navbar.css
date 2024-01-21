@@ -145,10 +145,17 @@
     background-color: var(--secondary);
 }
 
-.user-dropdown__item:last-child{
-    border-bottom-left-radius: 14px;
-    border-bottom-right-radius: 14px;
-    position: relative;
+.user-dropdown__relative-position {
+  position: relative;
+}
+
+.logout {
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+.user-menu__user-info {
+  text-align: justify;
 }
 
 .item__group {

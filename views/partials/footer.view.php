@@ -3,13 +3,13 @@
             <div class="footer__container">
                 <div class="footer__info">
                     <a href="/projekty/PCS2023/PCS-project">
-                        <img src="/projekty/PCS2023/PCS-project/images/icons/logo.png" alt="logo">
+                        <img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/logo.png" alt="logo">
                     </a>
                     <p>© 2023 - 2024 Prog blog</p>
                     <div class="social-media-links">
-                        <a href="#"><img src="/projekty/PCS2023/PCS-project/images/icons/Instagram.png" alt="instagram"></a>
-                        <a href="#"><img src="/projekty/PCS2023/PCS-project/images/icons/Facebook.png" alt="facebook"></a>
-                        <a href="#"><img src="/projekty/PCS2023/PCS-project/images/icons/LinkedIn.png" alt="linkedIn"></a>
+                        <a href="#"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/Instagram.png" alt="instagram"></a>
+                        <a href="#"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/Facebook.png" alt="facebook"></a>
+                        <a href="#"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/LinkedIn.png" alt="linkedIn"></a>
                     </div>
                 </div>
                 <hr class="separator">

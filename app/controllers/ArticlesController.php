@@ -1,8 +1,10 @@
 <?php
 
-namespace App\controllers;
+namespace App\Controllers;
 
 use App\Models\Article;
+use App\Services\Auth;
+use App\Services\UploadHelper;
 use Core\View;
 
 class ArticlesController
@@ -10,126 +12,126 @@ class ArticlesController
     const DENY_ARTICLES = 0;
     const PUBLISHED_ARTICLES = 1;
     const TO_CHECK_ARTICLES = 2;
+    const PAGE_ARTICLE_LIMIT = 10;
 
     protected Article $article;
+    protected UploadHelper $uploadHelper;
 
     public function __construct()
     {
         $this->article = new Article();
+        $this->uploadHelper = new UploadHelper();
     }
 
     public function showAllArticles(): View
     {
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = self::PAGE_ARTICLE_LIMIT * ($page - 1);
+        $articleCount = $this->article->getArticlesByStatusCount(self::PUBLISHED_ARTICLES)[0]['articles_count'];
+
+
         return View::render('articles', [
-            'title' => "Všecičky články",
-            'articles' => $this->article->getAllPublishedArticles(),
+            'title' => "Články",
+            'articles' => $this->article->getAllPublicArticles(self::PAGE_ARTICLE_LIMIT, $offset),
             'articleStatus' => "all",
+            'articleMaxPages' =>  max(ceil($articleCount / self::PAGE_ARTICLE_LIMIT), 1) ,
+            'pageUrl' => "articles?page=",
         ]);
     }
     
     public function showUserPublishedArticles(): View
     {
-        $userId = 1;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = self::PAGE_ARTICLE_LIMIT * ($page - 1);
+        $articleCount = $this->article->getUserArticlesByStatusCount(self::PUBLISHED_ARTICLES, Auth::getUser()['user_id'])[0]['articles_count'];
         return View::render('articles', [
             'title' => "Publikované články",
-            'articles' => $this->article->getUserArticlesByStatus($userId, self::PUBLISHED_ARTICLES),
+            'articles' => $this->article->getUserArticlesByStatus(Auth::getUser()['user_id'], self::PUBLISHED_ARTICLES, self::PAGE_ARTICLE_LIMIT, $offset),
             'articleStatus' => self::PUBLISHED_ARTICLES,
+            'articleMaxPages' =>  max(ceil($articleCount / self::PAGE_ARTICLE_LIMIT), 1),
+            'pageUrl' => "articles/user-articles/published?page=",
         ]);
     }
 
     public function showUserDenyArticles(): View
     {
-        $userId = 1;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = self::PAGE_ARTICLE_LIMIT * ($page - 1);
+        $articleCount = $this->article->getUserArticlesByStatusCount(self::DENY_ARTICLES, Auth::getUser()['user_id'])[0]['articles_count'];
         return View::render('articles', [
             'title' => "Zamítnuté články",
-            'articles' => $this->article->getUserArticlesByStatus($userId, self::DENY_ARTICLES),
+            'articles' => $this->article->getUserArticlesByStatus(Auth::getUser()['user_id'], self::DENY_ARTICLES, self::PAGE_ARTICLE_LIMIT, $offset),
             'articleStatus' => self::DENY_ARTICLES,
+            'articleMaxPages' =>  max(ceil($articleCount / self::PAGE_ARTICLE_LIMIT), 1),
+            'pageUrl' => "articles/user-articles/deny?page=",
         ]);
     }
 
-    public function showUserToCheckdArticles(): View
+    public function showUserToCheckArticles(): View
     {
-        $userId = 1;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = self::PAGE_ARTICLE_LIMIT * ($page - 1);
+        $articleCount = $this->article->getUserArticlesByStatusCount(self::TO_CHECK_ARTICLES, Auth::getUser()['user_id'])[0]['articles_count'];
         return View::render('articles', [
             'title' => "Kontrolované články",
-            'articles' => $this->article->getUserArticlesByStatus($userId, self::TO_CHECK_ARTICLES),
+            'articles' => $this->article->getUserArticlesByStatus(Auth::getUser()['user_id'], self::TO_CHECK_ARTICLES, self::PAGE_ARTICLE_LIMIT, $offset),
             'articleStatus' => self::TO_CHECK_ARTICLES,
+            'articleMaxPages' =>  max(ceil($articleCount / self::PAGE_ARTICLE_LIMIT), 1),
+            'pageUrl' => "articles/user-articles/to-check?page=",
         ]);
     }
 
     public function showUsersToApproveArticles(): View
     {
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = self::PAGE_ARTICLE_LIMIT * ($page - 1);
+        $articleCount = $this->article->getArticlesByStatusCount(self::TO_CHECK_ARTICLES)[0]['articles_count'];
         return View::render('articles', [
             'title' => "Kontrolované články",
-            'articles' => $this->article->getAllArticlesToApprove(),
+            'articles' => $this->article->getAllArticlesToApprove(self::PAGE_ARTICLE_LIMIT, $offset),
             'articleStatus' => "checkInProgress",
+            'articleMaxPages' =>  max(ceil($articleCount / self::PAGE_ARTICLE_LIMIT), 1),
+            'pageUrl' => "articles/user-articles/to-approve?page=",
         ]);
-    }
-
-    public function deleteArticle()
-    {
-        echo "CHELLO ROMAN";
-        //return header('location: /projekty/PCS2023/PCS-project/articles');
-    }
-
-    public function editArticle()
-    {
-        echo "ERRRRORRR";
     }
 
     public function createArticle($data)
     {
-        if(!$this->articleImageValidation()) {
-
+        if(!$this->uploadHelper->articleImageValidation()) {
             $em = "Něco se pokazilo. Zkontrolujte typ, nebo velikost souboru.";
-            return header('location: "/projekty/PCS2023/PCS-project/articles?error=$em"');
+            return header('location: ' . $GLOBALS['__BASE_PATH__'] . "articles?error=$em");
         };
-        $articleImgName = $this->createArticleImgName();
-        $this->uploadImg($articleImgName);
+        
+        $articleImgName = $this->uploadHelper->createArticleImgName();
+        $this->uploadHelper->uploadImg($articleImgName);
         $data['article_image'] = $articleImgName;
-        $this->article->createArticle($data);
+        $this->article->createArticle(Auth::getUser()['user_id'], $data['title'], $data['subtitle'], $data['article_content'], $data['article_image']);
+        return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'articles');
     }
-    
 
-
-    public function articleImageValidation(): bool
+    public function fillEditArticle(): void
     {
-        $imgSize = $_FILES['article_image']['size'];
-        $error = $_FILES['article_image']['error'];
-        $imgName = $_FILES['article_image']['name'];
+        $article = $this->article->find($_POST['article_id']);
+        echo json_encode($article[0]);
+    }
 
-        $imgEx = pathinfo($imgName, PATHINFO_EXTENSION);    
-        $imgExLc = strtolower($imgEx);
-		$allowedExs = array("jpg", "jpeg", "png"); 
+    public function editArticle($data)
+    {
+        $data['article_image'] = $_FILES['article_image']['name'];
 
-        if ($error !== 0) {
-            return false;
+        if ($_FILES['article_image']['size'] !== 12) {
+            $articleImgName = $this->uploadHelper->createArticleImgName();
+            $this->uploadHelper->uploadImg($articleImgName);
+            $data['article_image'] = $articleImgName;
         }
-
-        // if ($imgSize > 125000) {
-        //     return false;
-        // }
-
-        if (!in_array($imgExLc, $allowedExs)) {
-            return false;
-        }
-        return true;
+        $this->article->editArticle($data['article_id'], $data['title'], $data['subtitle'], $data['article_content'], $data['article_image']);
+        return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'articles');
     }
 
-    public function createArticleImgName(): string
+    public function deleteArticle()
     {
-        $imgName = $_FILES['article_image']['name'];
-        $imgEx = pathinfo($imgName, PATHINFO_EXTENSION);    
-        $imgExLc = strtolower($imgEx);
-        $newImgName = uniqid("IMG-", true).'.'.$imgExLc;
-
-        return $newImgName;
+        $this->article->deleteArticle($_GET['article_id']);
+        return header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
-    public function uploadImg(string $imgName): void
-    {
-        $imgTmpName = $_FILES['article_image']['tmp_name'];
-        $img_upload_path = $_SERVER['DOCUMENT_ROOT'] . '/projekty/PCS2023/PCS-project/images/uploads/articles/' . $imgName;
-        move_uploaded_file($imgTmpName, $img_upload_path);
-    }
 }

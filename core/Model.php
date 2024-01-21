@@ -19,8 +19,8 @@ class Model
         return $this->database->query("SELECT * FROM $this->table");
     }
 
-    public function find(int $id): array
+    public function find(int $id)
     {
-        return $this->database->query("SELECT * FROM $this->table where id = ?", [$id]);
+        return $this->database->query("SELECT * FROM $this->table where id = $id");
     }
 }

@@ -101,6 +101,15 @@ body {
   cursor: pointer;
 }
 
+.button--style-less {
+  background-color: transparent;
+  border: none;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 8px;

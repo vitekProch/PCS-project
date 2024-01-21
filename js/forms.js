@@ -1,4 +1,15 @@
-import { activeAfterClick } from './functionPack.js';
+
+console.log("Form věcičky");
+function activeAfterClick(mainElement) {
+  for (let i = 0; i < mainElement.length; i++) {
+    mainElement[i].addEventListener("click", function() {
+      for (let j = 0; j < mainElement.length; j++) {
+          mainElement[j].className = mainElement[0].className.replace(" active", "");
+      }
+    this.className += " active";
+    });
+  }
+}
 
 const MAX_NAME_LENGTH = 17;
 
@@ -41,7 +52,7 @@ function emailValidation(element) {
 
 function passwordValidation(element) {
   let parent = element.parentElement;
-  let checkPassword = document.getElementById("check-password");
+  let checkPassword = document.getElementById("check_password");
 
 
   if (element.value.length <= 0) {
@@ -57,7 +68,7 @@ function passwordValidation(element) {
 
 function passwordCheckValidation(element) {
   let parent = element.parentElement;
-  let password = document.getElementById("create-password");
+  let password = document.getElementById("create_password");
 
 
   if (element.value.length <= 0) {

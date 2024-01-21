@@ -70,8 +70,10 @@
 .delete-button-cross, .edit-button-pen {
   width: 20px;
   height: 20px;
-  margin-right: 15px;
   cursor: pointer;
+}
+.edit-button-pen {
+  margin-right: 15px;
 }
 
 .buttons-group {
@@ -110,7 +112,7 @@
   cursor: default;
 }
 
-.paggination {
+.pagination {
   width: 100%;
   display: flex;
   align-items: center;
@@ -142,7 +144,7 @@
   border-color: var(--green);
 }
 
-.paggination-box-previos, .paggination-box-next {
+.pagination-box-previos, .pagination-box-next {
   width: 32px;
   height: 32px;
   display: flex;
@@ -152,18 +154,18 @@
   cursor: pointer;
 }
 
-.paggination-box-previos, .paggination-box-next {
+.pagination-box-previos, .pagination-box-next {
   background-color: var(--lighter-primary);
   border: 1px solid var(--secondary);
 }
 
-.paggination-box-previos.disabled, .paggination-box-next.disabled {
+.pagination-box-previos.disabled, .pagination-box-next.disabled {
   opacity: 40%;
   cursor: default;
   pointer-events: none;
 }
 
-.paggination-box.active {
+.pagination-box.active {
   border-color: var(--green);
 }
 

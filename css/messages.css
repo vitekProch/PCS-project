@@ -26,7 +26,7 @@
 .messages-nav {
     padding: 0 6px;
     height: 86dvh;
-    max-width: 300px;
+    max-width: 320px;
     border-radius: 4px;
     overflow-y: auto;
     background-color: var(--lighter-primary);
@@ -113,8 +113,8 @@
 
 .message__header {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .bottom {
