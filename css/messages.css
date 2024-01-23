@@ -138,8 +138,8 @@
     background-color: var(--primary);
     width: 30px;
     height: 30px;
-    top: 90px;
-    left: 28px;
+    top: 79px;
+    left: 0px;
     display: none;
   }
 
@@ -150,24 +150,28 @@
 }
 
 @media only screen and (max-width:600px) {
-    .messages-nav__list-group-box {
-        display: none;
-    }
     .messages-nav {
         flex: none;
     }
+    .messages-nav__list-group-box {
+        display: none;
+    }
+    
     .messages-nav__header {
         display: none;
     }
+
 }
 
 @media only screen and (max-width:400px) {
     .messages-nav {
         display: none;
-        position: fixed;
-        background-color: var(--primary);
     }
 
+    #messages-nav-toggler[aria-expanded="true"] + .messages-nav {
+        display: block;
+    }
+    
     #messages-nav-toggler {
         display: block;
     }
