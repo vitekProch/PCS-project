@@ -5,14 +5,16 @@ use App\Services\Auth;
     <?php Core\View::render('partials/navbar') ?>
     <main class="main-class">
         <div class="container">
-            <div class="author">
-                <img class="avatar__article-detail avatar" src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $articleAuthor['avatar']; ?>" alt="avatar">   
-                <div class="author-info">
-                    <h3 class="author-name"><?= $articleAuthor['name']; ?></h3>
-                    <!--Důležité pořadí mezer! 1 za "Publikováno", 4 za datumem a 1 za číslem--> 
-                    <p class="article-info">Publikováno <span class="article-date-and-likes"><?php \App\Services\DateFormat::formatDate($article['created_at'], false);?>    <span class="like-amount"><?= $articleLikesCount; ?> </span></span></p>
+            <a href="<?= $GLOBALS['__BASE_PATH__']?>user?user_id=<?= $articleAuthor['id']; ?>">
+                <div class="author">
+                    <img class="avatar__article-detail avatar" src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $articleAuthor['avatar']; ?>" alt="avatar">   
+                    <div class="author-info">
+                        <h3 class="author-name"><?= $articleAuthor['name']; ?></h3>
+                        <!--Důležité pořadí mezer! 1 za "Publikováno", 4 za datumem a 1 za číslem--> 
+                        <p class="article-info">Publikováno <span class="article-date-and-likes"><?php \App\Services\DateFormat::formatDate($article['created_at'], false);?>    <span class="like-amount"><?= $articleLikesCount; ?> </span></span></p>
+                    </div>
                 </div>
-            </div>
+            </a>
             <article class="article-detail">
                 <h1><?= $article['title']; ?></h1>
                 <div class="img-holder">
@@ -47,11 +49,11 @@ use App\Services\Auth;
             </section>
             <?php endif; ?>
             <section class="comments">
-                <h2 class="comments-title">Komentáře:</h2>
+                <h2  id="add_comment_header" class="comments-title">Komentáře:</h2>
                 <?php foreach ($articleComments as $articleComment): ?>
-                <article class="comment">
-                    <div class="comment__header">
-                        <div class="user-menu user-menu--change">
+                    <article class="comment">
+                        <div class="comment__header">
+                            <div class="user-menu user-menu--change">
                             <img  class="avatar" src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $articleComment['comment_author_avatar']; ?>"></img>
                             <div class="user-menu__user-info">                        
                                 <p class="user-menu__user-name"><?= $articleComment['comment_author']; ?><span class="user-menu__role"><?= $articleComment['comment_author_role']; ?></span></p>  
@@ -65,6 +67,7 @@ use App\Services\Auth;
                     </div>
                 </article>
                 <?php endforeach; ?>
+                <?php if(isset($error)) { echo '<div class="alert">' . $error . '</div>'; } ?>
                 <?php if (Auth::getUser()): ?>
                 <div class="add-comment">
                     <form action="<?= $GLOBALS['__BASE_PATH__']?>article-detail/comment" method="POST" class="form">
@@ -80,7 +83,7 @@ use App\Services\Auth;
                         <div class="form__input-group">
                             <div class="input-icons textarea">
                                 <i class="icon"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/text.png" alt="" class="form-icon"></i>
-                                <textarea name="comment_content" id="textArea" cols="20" rows="8" placeholder="Text"></textarea>
+                                <textarea name="comment_content" id="article_comment_text" cols="20" rows="8" placeholder="Text"></textarea>
                                 <input id="article_id_value" name="article_id" type="hidden" value="<?= $article['id'] ?>">
                             </div>
                         </div>

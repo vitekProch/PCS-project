@@ -1,14 +1,15 @@
 // <----------- MESSAGE NAV FUNKČNÍ ----------->
-let messagesNavMenu = document.getElementById("messages-nav__menu");
-let messagesNavList = messagesNavMenu.getElementsByClassName("messages-nav__list");
-let currentNotification = document.getElementsByClassName("message-notification");
+const messagesNavbarToggle = document.getElementById("messages-nav-toggler");
+const messagesNavbarMenu = document.querySelector("#messages-nav");
+const messagesNavbarLinksContainer = document.getElementById("messages-nav__menu");
+let isMessageNavbarExpanded = messagesNavbarToggle.getAttribute("aria-expanded") === "true";
 
-for (let i = 0; i < messagesNavList.length; i++) {
-  messagesNavList[i].addEventListener("click", function() {
-    for (let j = 0; j < messagesNavList.length; j++) {
-        messagesNavList[j].className = messagesNavList[0].className.replace(" active", "");
-    }
-  currentNotification[i].style.display = "none";
-  this.className += " active";
-  });
-}
+const toggleMessageNavbarVisibility = () => {
+  isMessageNavbarExpanded = !isMessageNavbarExpanded;
+  messagesNavbarToggle.setAttribute("aria-expanded", isMessageNavbarExpanded);
+  messagesNavbarToggle.classList.toggle("collapsed");
+};
+ 
+messagesNavbarToggle.addEventListener("click", toggleMessageNavbarVisibility);
+messagesNavbarLinksContainer.addEventListener("click", (e) => e.stopPropagation());
+messagesNavbarMenu.addEventListener("click", toggleMessageNavbarVisibility);

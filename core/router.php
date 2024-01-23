@@ -33,7 +33,9 @@ class Router
     {
 
         if (!array_key_exists($url, $this->routes)) {
-            echo "404 not found";
+            return View::render('error-page', [
+                'title' => 'Page not found 404',
+            ]);
         }
         
         $route = $this->routes[$url];

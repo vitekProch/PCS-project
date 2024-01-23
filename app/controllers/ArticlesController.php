@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Services\Auth;
 use App\Services\UploadHelper;
 use Core\View;
+use App\Services\Errors;
 
 class ArticlesController
 {
@@ -28,7 +29,7 @@ class ArticlesController
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = self::PAGE_ARTICLE_LIMIT * ($page - 1);
         $articleCount = $this->article->getArticlesByStatusCount(self::PUBLISHED_ARTICLES)[0]['articles_count'];
-
+        $error = $_GET['error'] ?? null;
 
         return View::render('articles', [
             'title' => "Články",
@@ -36,6 +37,7 @@ class ArticlesController
             'articleStatus' => "all",
             'articleMaxPages' =>  max(ceil($articleCount / self::PAGE_ARTICLE_LIMIT), 1) ,
             'pageUrl' => "articles?page=",
+            'error'=> Errors::errorMessage($error),
         ]);
     }
     
@@ -97,14 +99,18 @@ class ArticlesController
 
     public function createArticle($data)
     {
+        if (empty($data['title']) || empty($data['subtitle']) || empty($data['article_content'])) {
+            return header('location: ' . $GLOBALS['__BASE_PATH__'] . "articles?error=input_empty");
+        }
+
         if(!$this->uploadHelper->articleImageValidation()) {
-            $em = "Něco se pokazilo. Zkontrolujte typ, nebo velikost souboru.";
-            return header('location: ' . $GLOBALS['__BASE_PATH__'] . "articles?error=$em");
+            return header('location: ' . $GLOBALS['__BASE_PATH__'] . "articles?error=wrong_file");
         };
-        
+
         $articleImgName = $this->uploadHelper->createArticleImgName();
-        $this->uploadHelper->uploadImg($articleImgName);
         $data['article_image'] = $articleImgName;
+        
+        $this->uploadHelper->uploadImg($articleImgName);
         $this->article->createArticle(Auth::getUser()['user_id'], $data['title'], $data['subtitle'], $data['article_content'], $data['article_image']);
         return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'articles');
     }

@@ -20,6 +20,16 @@ if (document.getElementById("avatar-selection")){
   activeAfterClick(avatars);
 }
 
+function basicValidation(element) {
+  let parent = element.parentElement;
+
+  if (element.value.length <= 0) {
+    return createErrorMessage(element, parent, `Prosím vyplňte: ${element.placeholder}`);
+  }
+
+  return deleteErrorMessage(element, parent);
+}
+
 function userNameValidation(element) {
   let parent = element.parentElement;
 

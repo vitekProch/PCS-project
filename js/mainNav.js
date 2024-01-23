@@ -3,7 +3,7 @@ const navbarMenu = document.querySelector("#navbar-menu");
 const navbarLinksContainer = navbarMenu.querySelector(".navbar-links");
 
 let isNavbarExpanded = navbarToggle.getAttribute("aria-expanded") === "true";
-
+console.log(navbarLinksContainer);
 const toggleNavbarVisibility = () => {
   isNavbarExpanded = !isNavbarExpanded;
   navbarToggle.setAttribute("aria-expanded", isNavbarExpanded);

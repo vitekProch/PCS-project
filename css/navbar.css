@@ -72,7 +72,6 @@
   }
 
 .user-menu {
-    min-width: 280px;
     display: flex;
     align-items: center;
     gap: 12px;

@@ -8,6 +8,7 @@ use App\Models\Like;
 use App\Models\User;
 use App\Services\Auth;
 use Core\View;
+use App\Services\Errors;
 use Exception;
 
 class UserController
@@ -27,7 +28,7 @@ class UserController
     
     public function showUser(): View
     {
-
+        $error = $_GET['error'] ?? null;
         $userId = $_GET['user_id'] ?? null;
         $userData = $this->user->find($userId)[0];
 
@@ -45,6 +46,7 @@ class UserController
             'userArticlesCount' => $this->article->getUsersArticlesCount($userId)[0]['users_articles_count'],
             'usersCommentsCount' => $this->comment->getUsersCommentsCount($userId)[0]['users_comments_count'],
             'inputFields' => $inputFields,
+            'error'=> Errors::errorMessage($error),
         ]);
     }
 
@@ -57,22 +59,22 @@ class UserController
     function userSettingsEdit($data) {
         $userId = Auth::getUser()['user_id'];
 
-        if(isset($data['email'])) {
+        if(!empty($data['email'])) {
             try {
                 $this->user->changeUserEmail($data['email'], $userId);
                 $_SESSION['user']['user_email'] = $data['email'];
             }
             catch (Exception $e) {
-                return header('Location: ' . $GLOBALS['__BASE_PATH__'] . 'user?user_id=' . $userId . '&error=vsetkoSpatne');
+                return header('Location: ' . $GLOBALS['__BASE_PATH__'] . 'user?user_id=' . $userId . '&error=user_email_exist');
             }
         }
 
-        if(isset($data['name'])) {
+        if(!empty($data['name'])) {
             $this->user->changeUserName($data['name'], $userId);
             $_SESSION['user']['user_name'] = $data['name'];
         }
 
-        if(isset($data['password'])) {
+        if(!empty($data['password'])) {
             $this->user->changePassword($data['password'], $userId);
         }
         return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'user?user_id=' . $userId);

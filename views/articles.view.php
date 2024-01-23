@@ -17,16 +17,17 @@
                     <i class="add-article"><img  title="Přidat článek" onclick="showArticleCreateModal()" src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/article-add.png" alt=""></i>
                 </nav>
             <?php endif; ?>
+            <?php if(isset($error)) { echo '<div class="alert">' . $error . '</div>'; } ?>
             <div class="article-container-small row" id="paginated-list" data-current-page="1" aria-live="polite">
-            <?php foreach ($articles as $aticle): ?>
-                <article class="article--small column">
+                <?php foreach ($articles as $aticle): ?>
+                    <article class="article--small column">
                     <div class="article__img-holder">
                         <img class="article__img article__img--smaller" src="<?= $GLOBALS['__BASE_PATH__']?>images/uploads/articles/<?= $aticle['article_image'] ?>" alt="java">
                     </div>
                     <div class="article__box">
                         <div class="article__text">
-                            <h3 class="article__title--smaller"><?= $aticle['title'] ?></h3>
-                            <p class="article__subtitle-smaller"><?= $aticle['subtitle'] ?></p>
+                            <h3 class="article__title--smaller"><?= \App\Services\TextShortener::textShortener($aticle['title']) ?></h3>
+                            <p class="article__subtitle-smaller"><?= \App\Services\TextShortener::textShortener($aticle['subtitle'], 90) ?></p>
                             <div class="buttons-group">
                                 <button class="button--success--smaller"><a href="<?= $GLOBALS['__BASE_PATH__']?>article-detail?article_id=<?= $aticle['id'] ?>">Přečíst článek</a></button>
 
@@ -57,11 +58,11 @@
             <div class="form__input-group">
                 <div class="input-icons textarea">
                     <i class="icon"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/title.png" alt="" class="form-icon"></i>
-                    <textarea name="title" id="title" cols="20" rows="1" placeholder="Titulek"></textarea>
+                    <textarea onchange="basicValidation(this)" name="title" id="title" cols="20" rows="1" placeholder="Titulek"></textarea>
                 </div>
                 <div class="input-icons textarea">
                     <i class="icon"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/subtitle.png" alt="" class="form-icon"></i>
-                    <textarea name="subtitle" id="subtitle" cols="20" rows="1" placeholder="Podtitulek"></textarea>
+                    <textarea onchange="basicValidation(this)" name="subtitle" id="subtitle" cols="20" rows="1" placeholder="Podtitulek"></textarea>
                 </div>
                 <div class="input-icons">
                     <i class="icon"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/upload.png" alt="" class="form-icon"></i>
@@ -69,7 +70,7 @@
                 </div>
                 <div class="input-icons textarea">
                     <i class="icon"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/text.png" alt="" class="form-icon"></i>
-                    <textarea name="article_content" id="text" cols="20" rows="8" placeholder="Text"></textarea>
+                    <textarea onchange="basicValidation(this)" name="article_content" id="text" cols="20" rows="8" placeholder="Text"></textarea>
                 </div>
             </div>
             <button class="button-form--success" type="submit">Zaslat ke kontrole</button>
@@ -82,11 +83,11 @@
             <div class="form__input-group">
                 <div class="input-icons textarea">
                     <i class="icon"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/title.png" alt="" class="form-icon"></i>
-                    <textarea name="title" id="edit_article_title" cols="20" rows="1"></textarea>
+                    <textarea onchange="basicValidation(this)" name="title" id="edit_article_title" cols="20" rows="1" placeholder="Titulek"></textarea>
                 </div>
                 <div class="input-icons textarea">
                     <i class="icon"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/subtitle.png" alt="" class="form-icon"></i>
-                    <textarea name="subtitle" id="edit_article_subtitle" cols="20" rows="1"></textarea>
+                    <textarea onchange="basicValidation(this)" name="subtitle" id="edit_article_subtitle" cols="20" rows="1" placeholder="Podtitulek"></textarea>
                 </div>
                 <div class="input-icons">
                     <i class="icon"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/upload.png" alt="" class="form-icon"></i>
@@ -94,7 +95,7 @@
                 </div>
                 <div class="input-icons textarea">
                     <i class="icon"><img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/text.png" alt="" class="form-icon"></i>
-                    <textarea name="article_content" id="edit_article_text" cols="20" rows="8"></textarea>
+                    <textarea onchange="basicValidation(this)" name="article_content" id="edit_article_text" cols="20" rows="8" placeholder="Text"></textarea>
                 </div>
             </div>
             <input id="article_id_value_edit" name="article_id" type="hidden">

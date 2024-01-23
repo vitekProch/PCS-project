@@ -6,6 +6,7 @@ use App\Services\Auth;
 <body>
     <?php Core\View::render('partials/navbar') ?>
     <main class="main-class">
+        <?php if(isset($error)) { echo '<div class="alert">' . $error . '</div>'; } ?>
         <div class="container container--center">
             <div class="user-info__container">
                 <img id="user_page_avatar" class="user-info__avatar avatar" src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $userData['avatar']; ?>" alt="">
@@ -40,7 +41,7 @@ use App\Services\Auth;
                                     <img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/accept.png" alt="" class="form-icon accept">
                                     </i>
                                 </button>
-                                <input onchange="<?= $field['tst']?>" placeholder="<?= $field['placeholder'] ?>" readonly required class="input-field" type="<?= $field['type'] ?>" name="<?= $field['name'] ?>" value="<?= $field['value'] ?>">
+                                <input placeholder="<?= $field['placeholder'] ?>" readonly  class="input-field" type="<?= $field['type'] ?>" name="<?= $field['name'] ?>" value="<?= $field['value'] ?>">
                             </form>
                     <?php endforeach; ?>
                         <div class="avatar__input">

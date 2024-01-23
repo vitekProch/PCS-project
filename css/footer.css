@@ -2,16 +2,19 @@
 footer {
   background-color: #0E0D0D;
   width: 100%;
-  height: 438px;
+  height: 400px;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
   
 .footer__container {
   display: flex;
   flex-direction: column;
   gap: 40px;
+}
+
+.footer__info, .footer_links, .separator {
+  margin: 0 10px;
 }
 
 .footer__info {
@@ -28,8 +31,6 @@ footer {
   opacity: 50%;
 }
 
-
-  
 .social-media-links {
   display: flex;
   gap: 32px;
@@ -41,7 +42,7 @@ footer {
   gap: 24px;
 }
   
-@media only screen and (max-width: 670px) {
+@media only screen and (max-width: 565px) {
   .footer__info {
     flex-direction: column;
     gap: 16px;

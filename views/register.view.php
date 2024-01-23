@@ -3,7 +3,7 @@
 <body>
     <?php Core\View::render('partials/navbar') ?>
     <main class="form-center main-class">
-    <?php if(isset($error)){echo $error;} ?>
+        <?php if(isset($error)) { echo '<div class="alert">' . $error . '</div>'; } ?>
         <form class="form" action="<?= $GLOBALS['__BASE_PATH__']?>register" method="POST">
             <h1 class="form__headline">Registrace</h1>
             <div class="form__input-group">

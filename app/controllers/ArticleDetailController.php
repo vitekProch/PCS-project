@@ -9,6 +9,7 @@ use App\Models\Message;
 use App\Models\User;
 use App\Services\Auth;
 use Core\View;
+use App\Services\Errors;
 
 class ArticleDetailController
 {
@@ -30,6 +31,7 @@ class ArticleDetailController
     public function showArticleDetail(): View
     {
         $articleId = $_GET['article_id'] ?? null;
+        $error = $_GET['error'] ?? null;
 
         if (!$articleId) {
             echo "ERROR článek nenalezen";
@@ -40,8 +42,6 @@ class ArticleDetailController
         $articleAuthor = $this->user->find($article["user_id"]);
         $articleComments= $this->comment->getArticleComments($article["id"]);
         $articleLikesCount = $this->like->getArticleLikeCount($articleId)[0]['article_like_count'];
-    
-
     
         if (Auth::getUser()) {
             $userId = Auth::getUser()['user_id'];
@@ -55,6 +55,7 @@ class ArticleDetailController
             'articleLikesCount' => $articleLikesCount,
             'articleAuthor' => $articleAuthor[0],
             'articleComments' => $articleComments,
+            'error'=> Errors::errorMessage($error),
         ]);
     }
 
@@ -78,8 +79,13 @@ class ArticleDetailController
 
     public function addComentToArticle($data)
     {
-        $userId = Auth::getUser()['user_id'];
         $articleId = $data["article_id"];
+        $userId = Auth::getUser()['user_id'];
+
+        if (empty($data['comment_content'])) {
+            return header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId&error=input_empty#add_comment_header");
+        }
+        echo "cus";
 
         $this->comment->createComment($userId, $articleId, $data['comment_content']);
         return header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId");
@@ -91,12 +97,17 @@ class ArticleDetailController
         $this->article->setArticleStatus($articleId, 1);
         return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'articles/user-articles/to-approve');
     }
+
     public function denyArticle($data)
     {
         $userId = Auth::getUser()['user_id'];
         $articleId = $data["article_id"];
-        $message = $data["message"];
-        $this->message->createMessage($userId, $articleId, $message);
+
+        if (empty($data['message'])) {
+            return header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId&error=input_empty");
+        }
+
+        $this->message->createMessage($userId, $articleId, $data["message"]);
         $this->article->setArticleStatus($articleId, 0);
         return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'articles/user-articles/to-approve');
     }

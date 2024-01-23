@@ -5,7 +5,12 @@
     <main class="main-class">
         <div class="container">
             <section class="massage-section">
-                <aside class="messages-nav">
+                <div id="messages-nav-toggler" aria-expanded="false" aria-controls="messages-nav" type="button" class="hamburger navbar-toggler collapsed">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <aside class="messages-nav" id="messages-nav" aria-labelledby="navbar-toggle">
                     <div class="messages-nav__container">
                         <div class="messages-nav__header">Zamítnuté články</div>
                         <ul class="messages-nav__menu" id="messages-nav__menu">
@@ -36,15 +41,10 @@
                 </aside>
                 <?php if ($messagesForArticle): ?>
                     <div class="contentik">
-                        <div id="messages-nav-toggler" type="button" class="hamburger navbar-toggler collapsed">
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                        </div>
                         <?php foreach ($messagesForArticle as $index => $messageForArticle): ?>
                             <article class="message">
                                 <div class="message__header">
-                                    <div class="user-menu user-menu--change">
+                                    <div class="user-menu">
                                         <img src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $allUserMessages[$index]['reviewing_person_avatar'] ?>" class="avatar">
                                         <div class="user-menu__user-info">                        
                                             <p class="user-menu__user-name"><?= $allUserMessages[$index]['reviewing_person'] ?> <span class="user-menu__role"><?= $allUserMessages[$index]['reviewing_person_role'] ?></span></p>  
@@ -76,7 +76,7 @@
             </section>
         </div>
     </main>
-
+    <script src="<?= $GLOBALS['__BASE_PATH__']?>js/messages.js"></script>
     <?php Core\View::render('partials/footer') ?>
     <?php Core\View::render('partials/main-scripts') ?>
 </body>

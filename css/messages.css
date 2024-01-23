@@ -18,7 +18,7 @@
     padding: 20px;
     border-radius: 16px;
     background-color: var(--lighter-primary);
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: 24px;
 }
@@ -115,6 +115,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .bottom {
