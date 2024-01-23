@@ -1,5 +1,5 @@
-<footer class="footer__container">
-
+<footer >
+    <div class="footer__container">
         <div class="footer__info">
             <a href="/projekty/PCS2023/PCS-project">
                 <img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/logo.png" alt="logo">
@@ -29,5 +29,5 @@
                 <li><a href="#">link3</a></li>
             </ul>
         </div>
-
+    </div>
 </footer>
