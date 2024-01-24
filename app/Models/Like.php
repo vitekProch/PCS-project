@@ -8,7 +8,7 @@ class Like extends Model
 {
     protected $table = 'likes';
 
-    public function getLikeStatus(int $userId, int $articleId)
+    public function getLikeStatus(int $userId, int $articleId): array
     {
         return $this->database->query("
             SELECT 
@@ -23,7 +23,7 @@ class Like extends Model
         ");
     }
 
-    public function getArticleLikeCount(int $articleId)
+    public function getArticleLikeCount(int $articleId): array
     {
         return $this->database->query("
             SELECT 
@@ -37,7 +37,7 @@ class Like extends Model
         ");
     }
 
-    public function createLikeArticle(int $articleId, int $userId)
+    public function createLikeArticle(int $articleId, int $userId): array
     {
         return $this->database->query("
             INSERT INTO 
@@ -50,7 +50,7 @@ class Like extends Model
         ");
     }
     
-    public function editLikeArticle(int $Id, bool $likeStatus): array
+    public function editLikeArticle(int $id, bool $likeStatus): array
     {
         return $this->database->query("
             UPDATE 
@@ -58,7 +58,7 @@ class Like extends Model
             SET 
                 liked = '$likeStatus' 
             WHERE 
-                id = $Id
+                id = $id
         ");
     }
 

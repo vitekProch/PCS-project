@@ -35,7 +35,7 @@ class UserController
         $inputFields = [
             ['type' => 'text', 'name' => 'name', 'value' => $userData['name'], 'placeholder' => 'Změnit jméno', 'tst' => 'userNameValidation(this)'],
             ['type' => 'email', 'name' => 'email', 'value' => $userData['email'], 'placeholder' => 'Změnit email', 'tst' => 'emailValidation(this)'],
-            ['type' => 'text', 'name' => 'password', 'value' => '', 'placeholder' => 'Změnit heslo', 'tst' => '']
+            ['type' => 'password', 'name' => 'password', 'value' => '', 'placeholder' => 'Změnit heslo', 'tst' => '']
         ];
 
         return View::render('user', [
@@ -78,7 +78,7 @@ class UserController
         if(!empty($data['password'])) {
             $this->user->changePassword($data['password'], $userId);
         }
-        
+
         header('location: ' . $GLOBALS['__BASE_PATH__'] . 'user?user_id=' . $userId);
     }
 }

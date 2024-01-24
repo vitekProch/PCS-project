@@ -134,19 +134,8 @@ class Article extends Model
                 article_status = 1
         ");
     }
-    
-    public function getArticleByLimit(int $limit)
-    {
-        return $this->database->query("
-            SELECT 
-                *
-            FROM 
-                $this->table 
-            LIMIT $limit
-        ");
-    }
 
-    public function getAllPublicArticles(int $limit, int $offset)  
+    public function getAllPublicArticles(int $limit, int $offset): array
     {
         return $this->database->query("
             SELECT 
@@ -162,21 +151,21 @@ class Article extends Model
         ");
     }
 
-    public function getUserArticlesByStatusCount($articleStatus, $userId)  
+    public function getUserArticlesByStatusCount(int $articleStatus, int $userId): array
     {
         return $this->database->query("
-        SELECT 
-            COUNT(id) AS articles_count 
-        FROM 
-            $this->table 
-        WHERE
-            article_status = $articleStatus
-        AND
-            user_id = $userId
+            SELECT 
+                COUNT(id) AS articles_count 
+            FROM 
+                $this->table 
+            WHERE
+                article_status = $articleStatus
+            AND
+                user_id = $userId
         ");
     }
 
-    public function getArticlesByStatusCount($articleStatus): array
+    public function getArticlesByStatusCount(int $articleStatus): array
     {
         return $this->database->query("
             SELECT 
@@ -188,5 +177,14 @@ class Article extends Model
         ");
     }
 
-
+    public function getArticleByLimit(int $limit): array
+    {
+        return $this->database->query("
+            SELECT 
+                *
+            FROM 
+                $this->table 
+            LIMIT $limit
+        ");
+    }
 }

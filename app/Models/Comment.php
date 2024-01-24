@@ -31,7 +31,7 @@ class Comment extends Model
         ");
     }
 
-    public function createComment(int $userId, int $articleId, string $comment_content)
+    public function createComment(int $userId, int $articleId, string $comment_content): array
     {
         return $this->database->query("
             INSERT INTO $this->table (

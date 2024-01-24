@@ -66,7 +66,7 @@ class Message extends Model
         ");
     }
 
-    public function getAllUserMessages(int $userId)
+    public function getAllUserMessages(int $userId): array
     {
         return $this->database->query("
             SELECT 

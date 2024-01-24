@@ -6,7 +6,7 @@ use App\Services\Auth as ServicesAuth;
 
 class Auth
 {
-    public function auth($role)
+    public function auth(string $role): array
     {
         $userRole = ServicesAuth::getUser()['user_role'];
 

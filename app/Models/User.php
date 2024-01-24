@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Core\Model;
+use PDOStatement;
 
 class User extends Model
 {
     protected $table = 'users';
 
-    public function exist(string $email)
+    public function exist(string $email): array
     {
         return $this->database->query("
             SELECT 
@@ -20,7 +21,7 @@ class User extends Model
         ");
     }
 
-    public function registerUser(string $name, string $email, string $password, string $avatar)
+    public function registerUser(string $name, string $email, string $password, string $avatar): array
     {
         $hashedPassword = $this->passwordHash($password);
         return $this->database->query("
@@ -36,7 +37,7 @@ class User extends Model
         );
     }
 
-    public function changePassword($password, $userId)
+    public function changePassword(string $password, int $userId): PDOStatement
     {
         $hashedPassword = $this->passwordHash($password);
         return $this->database->query("
@@ -50,7 +51,7 @@ class User extends Model
         
     }
 
-    public function changeUserName($userName, $userId)
+    public function changeUserName(string $userName, int $userId): PDOStatement
     {
         return $this->database->query("
             UPDATE 
@@ -63,7 +64,7 @@ class User extends Model
         
     }
 
-    public function changeUserEmail($email, $userId)
+    public function changeUserEmail(string $email, int $userId): PDOStatement
     {
         return $this->database->query("
             UPDATE 
@@ -76,7 +77,7 @@ class User extends Model
         
     }
 
-    public function changeAvatar($userId, $avatar)
+    public function changeAvatar(int $userId, string $avatar): PDOStatement
     {
         return $this->database->query("
             UPDATE 
@@ -94,6 +95,4 @@ class User extends Model
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         return $hashedPassword;
     }
-
-
 }
