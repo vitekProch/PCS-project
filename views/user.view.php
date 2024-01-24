@@ -12,7 +12,7 @@ use App\Services\Auth;
                 <img id="user_page_avatar" class="user-info__avatar avatar" src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $userData['avatar']; ?>" alt="">
                 <h2 class="user-info__user-name"><?= $userData['name']; ?></h2>
                 <p class="user-info__email"><?= $userData['email']; ?></p>
-                <p class="user-info__role"><?= $userData['role']; ?></p>
+                <p class="user-menu__role"><?= $userData['role']; ?></p>
                 <div class="user-info__propeties">
                     <div class="user-info__propeties-box">
                         <div id="article-likes" class="user-info__amount"><?= $userLikesCount ?></div>
