@@ -38,7 +38,6 @@ class UserController
             ['type' => 'text', 'name' => 'password', 'value' => '', 'placeholder' => 'Změnit heslo', 'tst' => '']
         ];
 
-
         return View::render('user', [
             'title' => "Uživatel",
             'userData' => $userData,
@@ -50,13 +49,15 @@ class UserController
         ]);
     }
 
-    public function changeAvatar() {
+    public function changeAvatar(): void 
+    {
         $this->user->changeAvatar(Auth::getUser()['user_id'], $_POST['avatar_img']);
         $_SESSION['user']['user_avatar'] = $_POST['avatar_img'];
         echo $_POST['avatar_img'];
     }
 
-    function userSettingsEdit($data) {
+    function userSettingsEdit(array $data): void
+    {
         $userId = Auth::getUser()['user_id'];
 
         if(!empty($data['email'])) {
@@ -65,7 +66,7 @@ class UserController
                 $_SESSION['user']['user_email'] = $data['email'];
             }
             catch (Exception $e) {
-                return header('Location: ' . $GLOBALS['__BASE_PATH__'] . 'user?user_id=' . $userId . '&error=user_email_exist');
+                header('Location: ' . $GLOBALS['__BASE_PATH__'] . 'user?user_id=' . $userId . '&error=user_email_exist');
             }
         }
 
@@ -77,6 +78,7 @@ class UserController
         if(!empty($data['password'])) {
             $this->user->changePassword($data['password'], $userId);
         }
-        return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'user?user_id=' . $userId);
+        
+        header('location: ' . $GLOBALS['__BASE_PATH__'] . 'user?user_id=' . $userId);
     }
 }
