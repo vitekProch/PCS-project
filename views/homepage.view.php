@@ -1,7 +1,7 @@
 <?php Core\View::render('partials/header', ['title' => $title]) ?>
 <body>
     <?php Core\View::render('partials/navbar') ?>
-    <main>
+    <main class="main-class">
         <section class="hero">
             <div class="container">
                 <div class="hero-container">
