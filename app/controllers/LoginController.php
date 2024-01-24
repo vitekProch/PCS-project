@@ -27,22 +27,22 @@ class LoginController
         ]);
     }
 
-    public function loginUser($data)
+    public function loginUser(array $data): void
     {
         $user = $this->user->exist($data['email'])[0];
         
         if(password_verify($data['password'], $user['password'] )) {
             Auth::login($user['id'], $user['name'], $user['email'], $user['avatar'], $user['role']);
-            return header('location: ' . $GLOBALS['__BASE_PATH__']);
+            header('location: ' . $GLOBALS['__BASE_PATH__']);
+            exit;
         }
-        else {
-            return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'login?error=wrong_credentials');
-        }
+
+        header('location: ' . $GLOBALS['__BASE_PATH__'] . 'login?error=wrong_credentials');
     }
 
-    public function logoutUser()
+    public function logoutUser(): void
     {
         Auth::logout();
-        return header('location: ' . $GLOBALS['__BASE_PATH__']);
+        header('location: ' . $GLOBALS['__BASE_PATH__']);
     }
 }
