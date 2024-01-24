@@ -17,31 +17,21 @@ class MessagesController
         $this->article = new Article();
         $this->message = new Message();
     }
+
     public function showMessages(): View
     {
         $userId = Auth::getUser()['user_id'];
         $articleId = $_GET['article_id'] ?? null;
-        $messagesForArticle = null;
         
         if ($articleId) {
             $messagesForArticle = $this->message->getUserMessagesForArticle($userId, $articleId);
             $this->message->messageIsOpen($userId, $articleId);
-        
         }
 
         return View::render('messages', [
             'title' => "Zprávy",
-            'messagesForArticle' => $messagesForArticle,
+            'messagesForArticle' => $messagesForArticle ?? NULL,
             'allUserMessages' => $this->message->getAllUserMessages($userId),
         ]);
-    }
-
-
-    public function stringShorten(string $string) 
-    {
-        if (strlen($string) >= 20) {
-            return substr($string, 0, 10). " ... " . substr($string, -5);
-        }
-        return $string;
     }
 }
