@@ -32,36 +32,30 @@ class ArticleDetailController
     {
         $articleId = $_GET['article_id'] ?? null;
         $error = $_GET['error'] ?? null;
-
-        if (!$articleId) {
-            echo "ERROR článek nenalezen";
-            //return View::render('error', ['message' => 'Článek nenalezen']);
-        }
-        $likeStatus = null;
         $article = $this->article->find($articleId)[0];
-        $articleAuthor = $this->user->find($article["user_id"]);
-        $articleComments = $this->comment->getArticleComments($article["id"]);
-        $articleLikesCount = $this->like->getArticleLikeCount($articleId)[0]['article_like_count'];
+        
+        if (!$articleId) {
+            return View::render('error-page', [
+                'title' => 'Page not found 404',
+            ]);
+        }
     
         if (Auth::getUser()) {
-            $userId = Auth::getUser()['user_id'];
-            $likeStatus = $this->like->getLikeStatus($userId, $articleId)[0] ?? null;
+            $likeStatus = $this->like->getLikeStatus(Auth::getUser()['user_id'], $articleId)[0] ?? null;
         }
         
         return View::render('article-detail', [
             'title' => $article['title'],
             'article' => $article,
-            'likeStatus' => $likeStatus, 
-            'articleLikesCount' => $articleLikesCount,
-            'articleAuthor' => $articleAuthor[0],
-            'articleComments' => $articleComments,
+            'likeStatus' => $likeStatus ?? NULL, 
+            'articleLikesCount' => $this->like->getArticleLikeCount($articleId)[0]['article_like_count'],
+            'articleAuthor' => $this->user->find($article["user_id"])[0],
+            'articleComments' => $this->comment->getArticleComments($article["id"]),
             'error'=> Errors::errorMessage($error),
         ]);
     }
 
-
-
-    public function changeUserArticleLikeStatus(array $data)
+    public function changeUserArticleLikeStatus(array $data): void
     {
         $userId = Auth::getUser()['user_id'];
         $articleId = $data['article_id'];
@@ -70,45 +64,47 @@ class ArticleDetailController
 
         if($articleStatusId > 0) {
             $this->like->editLikeArticle($articleStatusId, !boolval($articleStatus));
-            return header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId");
+            header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId");
+            exit;
         }
 
         $this->like->createLikeArticle($data['article_id'], $userId);
-        return header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId");
+        header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId");
     }
 
-    public function addComentToArticle($data)
+    public function addComentToArticle(array $data): void
     {
         $articleId = $data["article_id"];
         $userId = Auth::getUser()['user_id'];
 
         if (empty($data['comment_content'])) {
-            return header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId&error=input_empty#add_comment_header");
+            header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId&error=input_empty#add_comment_header");
+            exit;
         }
-        echo "cus";
 
         $this->comment->createComment($userId, $articleId, $data['comment_content']);
-        return header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId");
+        header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId");
     }
 
-    public function acceptArticle()
+    public function acceptArticle(): void
     {
         $articleId = $_GET['article_id'] ?? null;
         $this->article->setArticleStatus($articleId, 1);
-        return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'articles/user-articles/to-approve');
+        header('location: ' . $GLOBALS['__BASE_PATH__'] . 'articles/user-articles/to-approve');
     }
 
-    public function denyArticle($data)
+    public function denyArticle(array $data): void
     {
         $userId = Auth::getUser()['user_id'];
         $articleId = $data["article_id"];
 
         if (empty($data['message'])) {
-            return header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId&error=input_empty");
+            header('location: ' . $GLOBALS['__BASE_PATH__'] . "article-detail?article_id=$articleId&error=input_empty");
+            exit;
         }
 
         $this->message->createMessage($userId, $articleId, $data["message"]);
         $this->article->setArticleStatus($articleId, 0);
-        return header('location: ' . $GLOBALS['__BASE_PATH__'] . 'articles/user-articles/to-approve');
+        header('location: ' . $GLOBALS['__BASE_PATH__'] . 'articles/user-articles/to-approve');
     }
 }
