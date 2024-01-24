@@ -40,7 +40,7 @@ class ArticleDetailController
         $likeStatus = null;
         $article = $this->article->find($articleId)[0];
         $articleAuthor = $this->user->find($article["user_id"]);
-        $articleComments= $this->comment->getArticleComments($article["id"]);
+        $articleComments = $this->comment->getArticleComments($article["id"]);
         $articleLikesCount = $this->like->getArticleLikeCount($articleId)[0]['article_like_count'];
     
         if (Auth::getUser()) {

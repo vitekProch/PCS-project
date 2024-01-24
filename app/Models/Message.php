@@ -70,6 +70,7 @@ class Message extends Model
     {
         return $this->database->query("
             SELECT 
+                sender_user.id AS reviewing_person_id,
                 sender_user.name AS reviewing_person,
                 sender_user.email AS reviewing_person_email,
                 sender_user.avatar AS reviewing_person_avatar,

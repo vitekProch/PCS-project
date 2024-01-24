@@ -5,14 +5,12 @@ use App\Services\Auth;
     <?php Core\View::render('partials/navbar') ?>
     <main class="main-class">
         <div class="container">
-            <a href="<?= $GLOBALS['__BASE_PATH__']?>user?user_id=<?= $articleAuthor['id']; ?>">
-                <div class="author">
-                    <img class="avatar__article-detail avatar" src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $articleAuthor['avatar']; ?>" alt="avatar">   
-                    <div class="author-info">
-                        <h3 class="author-name"><?= $articleAuthor['name']; ?></h3>
-                        <!--Důležité pořadí mezer! 1 za "Publikováno", 4 za datumem a 1 za číslem--> 
-                        <p class="article-info">Publikováno <span class="article-date-and-likes"><?php \App\Services\DateFormat::formatDate($article['created_at'], false);?>    <span class="like-amount"><?= $articleLikesCount; ?> </span></span></p>
-                    </div>
+            <a class="author" href="<?= $GLOBALS['__BASE_PATH__']?>user?user_id=<?= $articleAuthor['id']; ?>">
+                <img class="avatar__article-detail avatar" src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $articleAuthor['avatar']; ?>" alt="avatar">   
+                <div class="author-info">
+                    <h3 class="author-name"><?= $articleAuthor['name']; ?></h3>
+                    <!--Důležité pořadí mezer! 1 za "Publikováno", 4 za datumem a 1 za číslem--> 
+                    <p class="article-info">Publikováno <span class="article-date-and-likes"><?php \App\Services\DateFormat::formatDate($article['created_at'], false);?>    <span class="like-amount"><?= $articleLikesCount; ?> </span></span></p>
                 </div>
             </a>
             <article class="article-detail">
@@ -52,20 +50,21 @@ use App\Services\Auth;
                 <h2  id="add_comment_header" class="comments-title">Komentáře:</h2>
                 <?php foreach ($articleComments as $articleComment): ?>
                     <article class="comment">
-                        <div class="comment__header">
+                        <a class="comment__header" href="<?= $GLOBALS['__BASE_PATH__']?>user?user_id=<?= $articleComment['comment_author_id']; ?>">
                             <div class="user-menu user-menu--change">
-                            <img  class="avatar" src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $articleComment['comment_author_avatar']; ?>"></img>
-                            <div class="user-menu__user-info">                        
-                                <p class="user-menu__user-name"><?= $articleComment['comment_author']; ?><span class="user-menu__role"><?= $articleComment['comment_author_role']; ?></span></p>  
-                                
-                                <div class="email-text"><?= $articleComment['comment_author_email']; ?></div>
+                                <img class="avatar" src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $articleComment['comment_author_avatar']; ?>" alt="User Avatar">
+                                <div class="user-menu__user-info">
+                                    <p class="user-menu__user-name"><?= $articleComment['comment_author']; ?><span class="user-menu__role"><?= $articleComment['comment_author_role']; ?></span></p>
+                                    <div class="email-text">
+                                        <?= $articleComment['comment_author_email']; ?>
+                                    </div>
+                                </div>
                             </div>
+                        </a>
+                        <div class="comment__body">
+                            <?= $articleComment['comment_content']; ?>
                         </div>
-                    </div>
-                    <div class="comment__body">
-                        <?= $articleComment['comment_content']; ?>
-                    </div>
-                </article>
+                    </article>
                 <?php endforeach; ?>
                 <?php if(isset($error)) { echo '<div class="alert">' . $error . '</div>'; } ?>
                 <?php if (Auth::getUser()): ?>

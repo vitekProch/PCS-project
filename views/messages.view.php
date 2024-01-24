@@ -41,18 +41,19 @@
                 </aside>
                 <?php if ($messagesForArticle): ?>
                     <div class="contentik">
+                        
                         <?php foreach ($messagesForArticle as $index => $messageForArticle): ?>
                             <article class="message">
                                 <div class="message__header">
-                                    <div class="user-menu">
+                                    <a class="user-menu" href="<?= $GLOBALS['__BASE_PATH__']?>user?user_id=<?= $allUserMessages[$index]['reviewing_person_id']; ?>">
                                         <img src="<?= $GLOBALS['__BASE_PATH__']?>images/avatars/<?= $allUserMessages[$index]['reviewing_person_avatar'] ?>" class="avatar">
                                         <div class="user-menu__user-info">                        
                                             <p class="user-menu__user-name"><?= $allUserMessages[$index]['reviewing_person'] ?> <span class="user-menu__role"><?= $allUserMessages[$index]['reviewing_person_role'] ?></span></p>  
                                             <div class="email-text"><?= $allUserMessages[$index]['reviewing_person_email'] ?></div>
                                         </div>
-                                    </div>
+                                    </a>
                                     <div>
-                                        <?= \App\Services\DateFormat::formatDate($messageForArticle['created_at'], true) ?>
+                                        <p class="message-send-time"><?= \App\Services\DateFormat::formatDate($messageForArticle['created_at'], true) ?></p>
                                     </div>
                                 </div>
                                 <p>Dobrý den,</p>

@@ -111,6 +111,10 @@
     transform: translate(-50%, -50%);
 }
 
+.message-send-time {
+    color: var(--light-blue);
+}
+
 .message__header {
     display: flex;
     justify-content: space-between;

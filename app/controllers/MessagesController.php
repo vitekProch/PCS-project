@@ -28,13 +28,11 @@ class MessagesController
             $this->message->messageIsOpen($userId, $articleId);
         
         }
-        
-        $allUserMessages = $this->message->getAllUserMessages($userId);
 
         return View::render('messages', [
             'title' => "Zprávy",
             'messagesForArticle' => $messagesForArticle,
-            'allUserMessages' => $allUserMessages,
+            'allUserMessages' => $this->message->getAllUserMessages($userId),
         ]);
     }
 

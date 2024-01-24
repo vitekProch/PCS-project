@@ -13,11 +13,12 @@ class Comment extends Model
         return $this->database->query("
             SELECT 
                 comments.id, 
-                comment_content, 
-                users.name as comment_author, 
-                users.email as comment_author_email, 
-                users.avatar as comment_author_avatar,
-                users.role as comment_author_role
+                comment_content,
+                users.id AS comment_author_id,
+                users.name AS comment_author, 
+                users.email AS comment_author_email, 
+                users.avatar AS comment_author_avatar,
+                users.role AS comment_author_role
             FROM 
                 $this->table 
             INNER JOIN
