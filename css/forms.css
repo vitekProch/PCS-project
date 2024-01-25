@@ -44,6 +44,21 @@
   height: 100dvh;
 }
 
+.remember-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.remember-text {
+  margin-left: 3px;
+}
+
+#remember {
+  width: auto;
+  accent-color: var(--light-blue)
+}
+
 input {
   width: 100%;
   position: relative;

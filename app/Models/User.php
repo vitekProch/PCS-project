@@ -21,7 +21,7 @@ class User extends Model
         ");
     }
 
-    public function registerUser(string $name, string $email, string $password, string $avatar): array
+    public function registerUser(string $name, string $email, string $password, string $avatar): PDOStatement
     {
         $hashedPassword = $this->passwordHash($password);
         return $this->database->query("
@@ -93,5 +93,29 @@ class User extends Model
     {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         return $hashedPassword;
+    }
+
+    public function setUserToken(int $userId, string $userToken): PDOStatement
+    {
+        return $this->database->query("
+            UPDATE 
+                $this->table 
+            SET 
+                user_token = ? 
+            WHERE 
+                id = ?", [$userToken, $userId]
+        );
+    }
+
+    public function getUserToken($userToken)
+    {
+        return $this->database->query("
+            SELECT 
+                * 
+            FROM 
+                $this->table 
+            WHERE 
+                user_token = '$userToken' 
+        ");
     }
 }

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Ned 21. led 2024, 16:39
--- Verze serveru: 10.4.28-MariaDB
--- Verze PHP: 8.2.4
+-- Vytvořeno: Čtv 25. led 2024, 18:44
+-- Verze serveru: 10.4.32-MariaDB
+-- Verze PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,13 +53,13 @@ INSERT INTO `articles` (`id`, `user_id`, `title`, `subtitle`, `article_content`,
 (28, 1, 'Bezpečné webové stránky: Zabezpečení proti útokům SQL Injection', 'Důležité bezpečnostní tipy pro prevenci útoků SQL Injection ve vašich webových projektech. Ochrana před neoprávněným přístupem k databázím.', 'SQL Injection je jedním z nejčastějších útoků na webové stránky. V tomto článku se dozvíte, jak chránit své webové aplikace před SQL Injection útoky a jak efektivně zabezpečit přístup k databázím.', 'JavaScript-65ad399449e2b7.28058365.png', 1, '2024-01-11 15:05:48'),
 (29, 1, 'Dynamické webové stránky s jQuery: Zjednodušte svůj kód', 'Jak využít knihovnu jQuery pro zlepšení interaktivity a dynamiky vašich webových stránek. Snadné manipulace s DOM a obsahem stránek.', 'jQuery je mocným nástrojem pro vývoj interaktivních webových stránek. V tomto článku se naučíte základy práce s jQuery a jak efektivně zjednodušit váš kód, abyste mohli lépe manipulovat s DOM a zvyšovat dynamiku svých webových stránek.', 'Java-65ad39e00df9c2.36928211.png', 1, '2024-01-11 15:06:12'),
 (30, 1, 'Objektově orientované programování v Pythonu', 'Prohlédněte si výhody objektově orientovaného programování a jak je lze využít v jazyce Python pro lepší strukturu a organizaci kódu.', 'Objektově orientované programování (OOP) přináší mnoho výhod pro organizaci kódu a znovupoužitelnost. V tomto článku se zaměříme na principy OOP v jazyce Python a ukážeme, jak vytvořit objektově orientovaný kód pro efektivní vývoj.', 'python-65ad397f10e580.95624648.jpg', 1, '2024-01-11 15:06:34'),
-(56, 1, 'Oprava sefe 2', 'FALSE NO NO NO', 'TESTE EL TESTE', 'python-65ad39d458d8f1.30955276.jpg', 2, '2024-01-14 17:24:38'),
-(57, 1, 'TEst', 'teast', 'atssat', 'Java-65ad39ce3ae4a5.61354394.png', 2, '2024-01-14 23:45:56'),
+(56, 1, 'Oprava sefe 2', 'FALSE NO NO JO', 'TESTE EL TESTE', 'python-65ad39d458d8f1.30955276.jpg', 2, '2024-01-14 17:24:38'),
 (58, 1, 'Objektově orientované programování v Pythonu', 'Prohlédněte si výhody objektově orientovaného programování a jak je lze využít v jazyce Python pro lepší strukturu a organizaci kódu.', 'Objektově orientované programování (OOP) přináší mnoho výhod pro organizaci kódu a znovupoužitelnost. V tomto článku se zaměříme na principy OOP v jazyce Python a ukážeme, jak vytvořit objektově orientovaný kód pro efektivní vývoj.', 'JavaScript-65ad39adeea051.43266133.png', 1, '2024-01-17 07:06:34'),
 (59, 1, 'Nový článek', 'Nový článek 17.01.2024', 'Nový článekNový článekNový článekNový článekNový článekNový článekNový článekNový článekNový článekNový článekNový článek', 'Java-65ad39f88c5d05.42209077.png', 0, '2024-01-17 23:00:18'),
 (61, 1, 'Nový editor článek', 'Nový editor článek', 'Nový editor článek', 'python-65ad39f007fcb8.02557108.jpg', 2, '2024-01-18 19:07:55'),
 (62, 1, 'Nový editor článek 2', 'Nový editor článek 2', 'Nový editor článek 2', 'Java-65ad39a6469a91.22723189.png', 0, '2024-01-18 19:08:06'),
-(65, 2, 'Upravený title článku', 'tastsadsaasd', 'tastastastas', 'JavaScript-65ad3a858ca575.65443863.png', 2, '2024-01-18 19:29:35');
+(65, 2, 'Upravený title článku', 'tastsadsaasd', 'tastastastas', 'JavaScript-65ad3a858ca575.65443863.png', 1, '2024-01-18 19:29:35'),
+(67, 1, 'Nový test', 'test', 'test', 'Java-65b12d6b5657a8.70411589.png', 2, '2024-01-24 15:31:55');
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,13 @@ INSERT INTO `comments` (`id`, `user_id`, `article_id`, `comment_content`, `creat
 (5, 1, 23, ' I really appreciate the insights and perspective shared in this article. It\'s definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!', '2024-01-13 14:09:17'),
 (6, 1, 23, 'Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář Komentááář 2', '2024-01-13 14:09:17'),
 (7, 2, 23, 'Bábuška', '2024-01-13 16:37:08'),
-(8, 3, 23, 'Nový komentář', '2024-01-13 16:38:31');
+(8, 3, 23, 'Nový komentář', '2024-01-13 16:38:31'),
+(16, 1, 58, '', '2024-01-23 11:31:02'),
+(17, 1, 62, 'Nový komentář', '2024-01-23 17:08:37'),
+(18, 1, 58, 'test\r\n', '2024-01-24 14:37:13'),
+(19, 1, 56, 'test', '2024-01-24 15:23:56'),
+(20, 24, 22, 'Tst', '2024-01-24 16:00:15'),
+(21, 24, 22, 'Tst', '2024-01-24 16:00:31');
 
 -- --------------------------------------------------------
 
@@ -113,7 +119,19 @@ INSERT INTO `likes` (`id`, `article_id`, `user_id`, `liked`) VALUES
 (14, 28, 1, 1),
 (15, 27, 1, 0),
 (16, 30, 1, 1),
-(19, 58, 3, 0);
+(19, 58, 3, 1),
+(21, 59, 1, 0),
+(22, 58, 1, 0),
+(23, 58, 1, 1),
+(24, 58, 1, 1),
+(25, 58, 1, 1),
+(26, 58, 1, 1),
+(27, 58, 1, 1),
+(28, 58, 1, 1),
+(29, 56, 1, 0),
+(30, 65, 24, 0),
+(31, 58, 24, 1),
+(32, 65, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -143,11 +161,10 @@ INSERT INTO `messages` (`id`, `user_id`, `article_id`, `message_content`, `messa
 (17, 1, 56, 'špatné', 1, '2024-01-14 21:35:12'),
 (18, 1, 56, 'Hrůzostrašné sorry bráško', 1, '2024-01-14 23:12:45'),
 (19, 1, 56, 'Udělej to znovu díky', 1, '2024-01-15 15:53:36'),
-(20, 1, 57, 'Nic moc', 1, '2024-01-15 15:55:00'),
 (21, 1, 21, 'Ne a ne a ne', 1, '2024-01-15 16:01:04'),
 (22, 1, 21, 'Vidím velký špatný', 1, '2024-01-15 16:01:46'),
-(24, 1, 62, 'Nefunkční', 0, '2024-01-21 15:37:12'),
-(25, 1, 59, 'Špatný text', 0, '2024-01-21 15:37:34');
+(24, 1, 62, 'Nefunkční', 1, '2024-01-21 15:37:12'),
+(25, 1, 59, 'Špatný text', 1, '2024-01-21 15:37:34');
 
 -- --------------------------------------------------------
 
@@ -161,17 +178,20 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL,
-  `role` varchar(255) NOT NULL
+  `role` varchar(255) NOT NULL,
+  `user_token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Vypisuji data pro tabulku `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `role`) VALUES
-(1, 'Admin', 'admin@gmail.com', '$2y$10$eSEq6iFeVTHcghaMzbIufeOpM9LXA6p/j1jr3BjC06MMs4nIcbU3q', 'avatar1.png', 'ADMIN'),
-(2, 'Editor', 'editor@gmail.com', '$2y$10$bsnspX/esefRw1p/tzn30OFDWbRp5wDur8VKG3iE3CDT3YpK0fpqi', 'avatar2.png', 'EDITOR'),
-(3, 'User', 'user@gmail.com', '$2y$10$76XIs17gq9vxpIdKBqk8r.WCPuQpjqY4dbnJxJ4/BBiZS5/jWvPDe', 'avatar3.png', 'USER');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `role`, `user_token`) VALUES
+(1, 'Admin', 'admin@gmail.com', '$2y$10$G8h88qVPsfFDp8n3cFuTTeSMMGrG6d9l8U7zD7R/AnRlof9BltSCW', 'avatar1.png', 'ADMIN', '35997603388c804274d71df714757353'),
+(2, 'Editor', 'editor@gmail.com', '$2y$10$bsnspX/esefRw1p/tzn30OFDWbRp5wDur8VKG3iE3CDT3YpK0fpqi', 'avatar2.png', 'EDITOR', NULL),
+(3, 'User', 'user@gmail.com', '$2y$10$76XIs17gq9vxpIdKBqk8r.WCPuQpjqY4dbnJxJ4/BBiZS5/jWvPDe', 'avatar3.png', 'USER', NULL),
+(24, 'test', 'test@gmail.com', '$2y$10$iF.dgORXseKhumdeG4OS1O6TXxVxe42dSOigij7.8SxuVH.JoWGI6', 'avatar4.png', 'USER', NULL),
+(25, 'tst', 'tst@gmail.com', '$2y$10$ESkkmq7OWvnGv/EEEEh2COaAlp1Y1D0XNHr5.qFdze0HwgiGMOfaq', 'avatar5.png', 'USER', '33bf81cdc2a0aa39e75496885c4a8779');
 
 --
 -- Indexy pro exportované tabulky
@@ -223,19 +243,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pro tabulku `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT pro tabulku `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pro tabulku `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pro tabulku `messages`
@@ -247,7 +267,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT pro tabulku `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Omezení pro exportované tabulky

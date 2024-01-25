@@ -20,6 +20,14 @@ class LoginController
     public function showLogin(): View
     {
         $error = $_GET['error'] ?? null;
+        $userToken = $_COOKIE['user_token'] ?? null;
+
+        if($userData = $this->user->getUserToken($userToken)) {
+            $user = $userData[0];
+            Auth::login($user['id'], $user['name'], $user['email'], $user['avatar'], $user['role']);
+            header('location: ' . $GLOBALS['__BASE_PATH__']);
+            exit;
+        }
 
         return View::render('login', [
             'title' => "Přihlášení",
@@ -30,8 +38,15 @@ class LoginController
     public function loginUser(array $data): void
     {
         $user = $this->user->exist($data['email'])[0];
-        
+
         if(password_verify($data['password'], $user['password'] )) {
+
+            if($data['remember'] === "true") {
+                $userToken = bin2hex(random_bytes(16));
+                $this->user->setUserToken($user['id'], $userToken);
+                setcookie("user_token", $userToken, time() + (86400 * 30), "/");
+            }
+
             Auth::login($user['id'], $user['name'], $user['email'], $user['avatar'], $user['role']);
             header('location: ' . $GLOBALS['__BASE_PATH__']);
             exit;

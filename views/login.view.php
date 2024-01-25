@@ -15,6 +15,10 @@
                     <i class="icon"><img src="./images/icons/lock.png" alt="" class="form-icon"></i>
                     <input class="input-field" type="password" name="password" placeholder="Heslo">
                 </div>
+                <div class="remember-box">
+                    <label class="remember-text" for="remember">Zapamatuj si mě</label>
+                    <input class="remember-checkbox" type="checkbox" name="remember" id="remember" value="true">
+                </div>
             </div>
             <button class="button-form--success" type="submit">Přihlásit se</button>
             <div class="form__footer">
