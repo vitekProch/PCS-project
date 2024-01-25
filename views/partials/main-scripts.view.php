@@ -1,3 +1,4 @@
+<script> const BASE_PATH = <?= json_encode($GLOBALS['__BASE_PATH__']) ?>;</script>
 <script src="<?= $GLOBALS['__BASE_PATH__']?>js/userNav.js"></script>
 <script src="<?= $GLOBALS['__BASE_PATH__']?>js/mainNav.js"></script>
 <script src="<?= $GLOBALS['__BASE_PATH__']?>js/forms.js"></script>

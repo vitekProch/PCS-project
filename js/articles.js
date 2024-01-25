@@ -3,7 +3,7 @@ for (let article of articles) {
     article.addEventListener("click", function(){
         $.ajax({
             method: "POST",
-            url: "http://localhost/projekty/PCS2023/PCS-project/articles/fill-edit-article",
+            url: "http://localhost" + BASE_PATH + "articles/fill-edit-article",
             data: {
                 'article_edit' : true,
                 'article_id': this.getAttribute('article_id'),
