@@ -17,7 +17,7 @@ class Errors
     ];
 
 
-    public static function errorMessage($error)   : ?string
+    public static function errorMessage(?string $error): ?string
     {   
         if (!$error) {
             return null;
@@ -28,7 +28,5 @@ class Errors
         }
         
         return self::ERROR_MESSAGES[$error];
-        
     }
-
 }

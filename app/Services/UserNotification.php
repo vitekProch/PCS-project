@@ -18,5 +18,4 @@ class UserNotification
         $article = new Message;
         echo $article->getMessagesCount(Auth::getUser()['user_id'])[0]['messages_count'];
     }
-
 }

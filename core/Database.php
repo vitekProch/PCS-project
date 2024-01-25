@@ -26,6 +26,7 @@ class Database
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
         ];
+        
         try {
             $this->pdo = new PDO("mysql:host=$host", $user, $pass, $options);
 
@@ -47,8 +48,7 @@ class Database
         $this->pdo = new PDO($dsn, $user, $pass, $options);
     }
 
-
-    public function query(string $query, array $values = null)
+    public function query(string $query, array $values = null): array
     {
 
         if ($values) {
@@ -59,11 +59,10 @@ class Database
 
             $stmp = $this->pdo->query($query)->fetchAll();
         }
-
         return $stmp;
     }
 
-    protected function executeSqlFile(string $filePath)
+    protected function executeSqlFile(string $filePath): void
     {
         $sqlContent = file_get_contents($filePath);
 

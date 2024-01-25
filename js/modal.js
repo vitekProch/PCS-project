@@ -6,7 +6,6 @@ function showArticleCreateModal() {
   crateArticleModal.style.display = "flex";
 }
 
-
 function showArticleDenyModal() {
   denyArticlemodal.style.display = "flex";
 }

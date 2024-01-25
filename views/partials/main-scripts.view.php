@@ -1,4 +1,3 @@
-<script src="<?= $GLOBALS['__BASE_PATH__']?>js/main.js"></script>
 <script src="<?= $GLOBALS['__BASE_PATH__']?>js/userNav.js"></script>
 <script src="<?= $GLOBALS['__BASE_PATH__']?>js/mainNav.js"></script>
 <script src="<?= $GLOBALS['__BASE_PATH__']?>js/forms.js"></script>

@@ -3,8 +3,6 @@ let userMenuDropdown = document.getElementById("user-menu-dropdown");
 let articlesCount = document.getElementById("check-articles-count");
 let messageCount = document.getElementById("message-count");
 
-
-
 if (userMenu) {
     userMenu.addEventListener("click", function(){
         if(userMenuDropdown.style.display === "block") {

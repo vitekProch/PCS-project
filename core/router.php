@@ -7,19 +7,19 @@ class Router
     public $routes = [];
 
     // Přidává novou trasu do routovacího systému pro GET metodu
-    public function get($url, $controller, $callback, $midware = [])
+    public function get(string $url, string $controller, string $callback, array $midware = [])
     {
         $this->addRoute($url, $controller, $callback, "GET", $midware);
     }
 
     // Přidává novou trasu do routovacího systému pro POST metodu
-    public function post($url, $controller, $callback)
+    public function post(string $url, $controller, $callback)
     {
         $this->addRoute($url, $controller, $callback, "POST");
     }
 
     // Přidává novou trasu do routovacího systému pro libovolné metody
-    public function addRoute($url, $controller, $callback, $http_method, $midware = [])
+    public function addRoute(string $url, string $controller, string $callback, string $http_method, array $midware = [])
     {
         $this->routes[$http_method . $url] = [
             'controller' => $controller,
@@ -29,21 +29,21 @@ class Router
         ];
     }
 
-    public function dispatch($url)
+    public function dispatch(string $url): void
     {
-
         if (!array_key_exists($url, $this->routes)) {
-            return View::render('error-page', [
+            View::render('error-page', [
                 'title' => 'Page not found 404',
             ]);
+            exit;
         }
         
         $route = $this->routes[$url];
-        // Pokud některý z middleware vrátí false, přerušíme zpracování
 
         $middlewareResult = $this->runMiddlewares($route['midware']);
         if (!$middlewareResult['success']) {
-            return header('Location: ' . $middlewareResult['redirect']);
+            header('Location: ' . $middlewareResult['redirect']);
+            exit;
         }
 
         $controller = $this->routes[$url]['controller'];
@@ -54,7 +54,7 @@ class Router
         $controllerInit->$callback($_POST ? $_POST : []);
     }
 
-    private function runMiddlewares($middlewares)
+    private function runMiddlewares(array $middlewares): array
     {
         foreach ($middlewares as $middleware) {
             $separateParams = explode(':', $middleware);
@@ -73,5 +73,4 @@ class Router
 
         return ['success' => true];
     }
-    
 }

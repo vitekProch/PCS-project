@@ -1,5 +1,5 @@
+const MAX_NAME_LENGTH = 17;
 
-console.log("Form věcičky");
 function activeAfterClick(mainElement) {
   for (let i = 0; i < mainElement.length; i++) {
     mainElement[i].addEventListener("click", function() {
@@ -11,9 +11,6 @@ function activeAfterClick(mainElement) {
   }
 }
 
-const MAX_NAME_LENGTH = 17;
-
-// <----------- AVATAR SELECT FUNKČNÍ ----------->
 if (document.getElementById("avatar-selection")){
   let avataractiveAfterClick = document.getElementById("avatar-selection");
   let avatars = avataractiveAfterClick.getElementsByClassName("avatar__image");
@@ -44,7 +41,6 @@ function userNameValidation(element) {
   return deleteErrorMessage(element, parent);
 }
 
-
 function emailValidation(element) {
   let parent = element.parentElement;
   console.log(parent.parentElement.parentElement.children[2]);
@@ -58,7 +54,6 @@ function emailValidation(element) {
 
   return deleteErrorMessage(element, parent);
 }
-
 
 function passwordValidation(element) {
   let parent = element.parentElement;
@@ -79,7 +74,6 @@ function passwordValidation(element) {
 function passwordCheckValidation(element) {
   let parent = element.parentElement;
   let password = document.getElementById("create_password");
-
 
   if (element.value.length <= 0) {
     return createErrorMessage(element, parent, `Prosím vyplňte: ${element.placeholder}`)
@@ -122,8 +116,6 @@ function hideUserEditButtons(element) {
   parent.getElementsByClassName("accept")[0].style.display = "none";
   parent.getElementsByTagName("input")[0].setAttribute("readonly", true);
 }
-
-
 
 function deleteErrorMessage(element, parent) {
   activeSubmitBtn();
