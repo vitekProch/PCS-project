@@ -1,9 +1,3 @@
-.container-hero {
-  height: 100%;
-  margin: auto auto;
-  display: block;
-}
-
 .hero {
   background-image: url("../images/image/hero-img.jpg");
   background-repeat: no-repeat;
@@ -41,29 +35,6 @@
   text-align: center;
   font-size: 42px;
   font-weight: 500;
-}
-
-.test-section{
-  position: relative;
-}
-.test-section0 img, .test-section2 img {
-  rotate: 90deg;
-  width: 437px;
-  height: 197px;
-  top: 46px;
-  right: -350px;
-  position: absolute;
-  z-index: -2;
-}
-
-.test-section1 img {
-  rotate: 90deg;
-  width: 437px;
-  height: 197px;
-  top: 46px;
-  left: 15%;
-  position: absolute;
-  z-index: -2;
 }
 
 .article-container{
@@ -138,10 +109,6 @@
 }
 
 @media only screen and (max-width:960px) {
-  .test-section img, .test-section0 img, .test-section1 img, .test-section2 img {
-    display: none;
-  }
-
   .article {
     width: 100%;
   }
@@ -195,7 +162,4 @@
     font-size: 12px;
   }
 
-  .article--small {
-    height: auto !important;
-  }
 }
