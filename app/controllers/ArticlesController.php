@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Article;
 use App\Services\Auth;
-use App\Services\UploadHelper;
+use App\Helpers\UploadHelper;
 use Core\View;
 use App\Services\Errors;
 

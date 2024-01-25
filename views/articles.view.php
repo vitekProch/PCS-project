@@ -26,8 +26,8 @@
                     </div>
                     <div class="article__box">
                         <div class="article__text">
-                            <h3 class="article__title--smaller"><?= \App\Services\TextShortener::textShortener($aticle['title']) ?></h3>
-                            <p class="article__subtitle-smaller"><?= \App\Services\TextShortener::textShortener($aticle['subtitle'], 90) ?></p>
+                            <h3 class="article__title--smaller"><?= \App\Helpers\TextShortener::textShortener($aticle['title']) ?></h3>
+                            <p class="article__subtitle-smaller"><?= \App\Helpers\TextShortener::textShortener($aticle['subtitle'], 90) ?></p>
                             <div class="buttons-group">
                                 <button class="button--success--smaller"><a href="<?= $GLOBALS['__BASE_PATH__']?>article-detail?article_id=<?= $aticle['id'] ?>">Přečíst článek</a></button>
 

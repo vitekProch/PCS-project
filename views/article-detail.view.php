@@ -10,7 +10,7 @@ use App\Services\Auth;
                 <div class="author-info">
                     <h3 class="author-name"><?= $articleAuthor['name']; ?></h3>
                     <!--Důležité pořadí mezer! 1 za "Publikováno", 4 za datumem a 1 za číslem--> 
-                    <p class="article-info">Publikováno <span class="article-date-and-likes"><?php \App\Services\DateFormat::formatDate($article['created_at'], false);?>    <span class="like-amount"><?= $articleLikesCount; ?> </span></span></p>
+                    <p class="article-info">Publikováno <span class="article-date-and-likes"><?php \App\Helpers\DateFormat::formatDate($article['created_at'], false);?>    <span class="like-amount"><?= $articleLikesCount; ?> </span></span></p>
                 </div>
             </a>
             <article class="article-detail">

@@ -87,7 +87,6 @@ class User extends Model
             WHERE 
                 id = ?", [$avatar, $userId]
         );
-        
     }
 
     protected function passwordHash(string $password): string 

@@ -25,7 +25,7 @@
                                             <img class="messages-nav__list-group__article-img" src="<?= $GLOBALS['__BASE_PATH__']?>images/uploads/articles/<?= $allUserMessage['article_image'] ?>" alt="article-img">
                                             <div class="messages-nav__list-group-box">
                                                 <div class="messages-nav__list-group-info">
-                                                    <p class="messages-nav__list-group-article-title"><?= \App\Services\TextShortener::textShortener($allUserMessage['title']) ?></p>
+                                                    <p class="messages-nav__list-group-article-title"><?= \App\Helpers\TextShortener::textShortener($allUserMessage['title']) ?></p>
                                                     <p class="messages-nav__list-group-editor-name"><?= $allUserMessage['reviewing_person_role'] ?>: <?= $allUserMessage['reviewing_person'] ?></p>
                                                 </div>
                                                 <?= $allUserMessage['message_open'] ? '' : '<div class="message-notification"></div>'; ?>
@@ -53,7 +53,7 @@
                                         </div>
                                     </a>
                                     <div>
-                                        <p class="message-send-time"><?= \App\Services\DateFormat::formatDate($messageForArticle['created_at'], true) ?></p>
+                                        <p class="message-send-time"><?= \App\Helpers\DateFormat::formatDate($messageForArticle['created_at'], true) ?></p>
                                     </div>
                                 </div>
                                 <p>Dobrý den,</p>

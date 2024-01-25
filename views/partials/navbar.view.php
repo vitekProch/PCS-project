@@ -36,7 +36,7 @@
                                 <?php if (in_array(App\Services\Auth::getUser()['user_role'], App\Services\Auth::ROLES['EDITOR'])): ?>
                                     <li>
                                         <a class="user-dropdown__item" href="<?= $GLOBALS['__BASE_PATH__']?>articles/user-articles/to-approve" class="item__group">
-                                            <div class="small-notification" id="check-articles-count" current-count="<?= App\Services\UserNotification::getToApproveCount(); ?>">
+                                            <div class="small-notification" id="check-articles-count" current-count="<?= App\Helpers\UserNotification::getToApproveCount(); ?>">
                                                 <img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/check-broken2.png" alt="Nastavení">
                                             </div>
                                             Schválit
@@ -53,7 +53,7 @@
 
                                 <li>
                                     <a class="user-dropdown__item" href="<?= $GLOBALS['__BASE_PATH__']?>messages" class="item__group">
-                                        <div class="small-notification" id="message-count" current-count="<?= App\Services\UserNotification::getMessagesCount(); ?>">
+                                        <div class="small-notification" id="message-count" current-count="<?= App\Helpers\UserNotification::getMessagesCount(); ?>">
                                             <img src="<?= $GLOBALS['__BASE_PATH__']?>images/icons/message-text-01.png" alt="Nastavení">
                                         </div>  
                                         Zprávy

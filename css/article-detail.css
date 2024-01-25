@@ -1,11 +1,4 @@
 
-.article-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  margin: 50px 0px;
-}
-
 .author {
   display: flex;
   align-items: center;
@@ -28,6 +21,13 @@
   color: var(--secondary);
   position: relative;
   display: inline;
+}
+
+.article-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin: 50px 0px;
 }
 
 .article-date-and-likes{

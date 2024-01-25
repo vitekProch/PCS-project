@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Helpers;
 
+use App\Services\Auth;
 use App\Models\Article;
 use App\Models\Message;
 

@@ -48,7 +48,7 @@ class Database
         $this->pdo = new PDO($dsn, $user, $pass, $options);
     }
 
-    public function query(string $query, array $values = null): array
+    public function query(string $query, array $values = null)
     {
 
         if ($values) {
