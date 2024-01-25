@@ -40,7 +40,7 @@
                     </div>
                 </aside>
                 <?php if ($messagesForArticle): ?>
-                    <div class="contentik">
+                    <div class="message-container">
                         
                         <?php foreach ($messagesForArticle as $index => $messageForArticle): ?>
                             <article class="message">

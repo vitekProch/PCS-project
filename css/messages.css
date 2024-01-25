@@ -4,7 +4,7 @@
     height: 80%;
 }
   
-.contentik {
+.message-container {
     height: 85dvh;
     display: flex;
     flex-direction: column;
