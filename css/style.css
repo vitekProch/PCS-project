@@ -55,9 +55,6 @@ body {
 .main-class {
   padding-top: 71px;
   margin-bottom: 75px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   height: 100%;
 }
 
