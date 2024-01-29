@@ -29,5 +29,7 @@ class Auth
     {
         session_unset();
         session_destroy();
+        unset($_COOKIE['user_token']); 
+        setcookie('user_token', '', -1, '/');
     }
 }
