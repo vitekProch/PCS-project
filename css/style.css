@@ -31,6 +31,30 @@
 
 body {
   background-color: var(--primary);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+main {
+  flex: 1;
+}
+
+.main-class {
+  display: flex;
+  flex-direction: column;
+  padding-top: 71px;
+  margin-bottom: 75px;
+  height: 100%;
+}
+
+.container {
+  max-width: 1140px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .error-page {
@@ -50,22 +74,6 @@ body {
   border-radius: 12px;
   font-size: 18px;
   text-align: center;
-}
-
-.main-class {
-  display: flex;
-  flex-direction: column;
-  padding-top: 71px;
-  margin-bottom: 75px;
-  height: 100%;
-}
-
-.container {
-  max-width: 1140px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .modal-overlay{
@@ -137,24 +145,20 @@ body {
   border-radius: 50%;
 }
 
-/* width */
 ::-webkit-scrollbar {
   width: 8px;
   background-color: #0E0D0D;
 }
 
-/* Track */
 ::-webkit-scrollbar-track { 
   border-radius: 16px;
 }
  
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--secondary);
   border-radius: 4px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
@@ -166,8 +170,6 @@ body {
 .separator {
   opacity: 30%;
 }
-
-
 
 .disable {
   pointer-events: none;
@@ -209,7 +211,6 @@ body {
   .hamburger.navbar-toggler.collapsed .bar:nth-child(3){
   transform: translateY(0px);
 }
-
 
 @media screen and (max-width: 360px) {
   .container {
