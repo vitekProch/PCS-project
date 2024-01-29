@@ -1,3 +1,12 @@
+<?php 
+    $currentPath = $_SERVER['REQUEST_URI'];
+    $pathKey = substr($currentPath, 30, 8);
+
+    function isCurrentPage($path, $currentPath)
+    {
+        return ($path === $currentPath) ? 'active' : '';
+    }
+?>
 <header id="navbar" class="nav-background-color">
     <nav class="navbar-container">
         <div class="logo">
@@ -12,8 +21,8 @@
         </button>
         <div id="navbar-menu" aria-labelledby="navbar-toggle">
             <ul class="navbar-links">
-                <li class="navbar-item"><a class="navbar-link" href="<?= $GLOBALS['__BASE_PATH__']?>">Úvod</a></li>
-                <li class="navbar-item"><a class="navbar-link" href="<?= $GLOBALS['__BASE_PATH__']?>articles">Články</a></li>
+                <li class="navbar-item <?= isCurrentPage($pathKey, ""); ?>"><a class="navbar-link" href="<?= $GLOBALS['__BASE_PATH__']?>">Úvod</a></li>
+                <li class="navbar-item <?= isCurrentPage($pathKey, "articles"); ?>"><a class="navbar-link" href="<?= $GLOBALS['__BASE_PATH__']?>articles">Články</a></li>
                 <?php if(App\Services\Auth::getUser()): ?>
                     <li class="navbar-item">  
                         <div class="user-menu__container">                
